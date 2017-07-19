@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编目管理查看</title>
+    <script src="../../js/lib/jquery-1.12.1.js"></script>
+    <script src="../../js/public.js"></script>
+    <link rel="stylesheet" href="../../css/jquery.selectbox.css">
+    <script src="../../js/lib/jquery.selectbox.js"></script>
+    <script src="../../js/app/reset.js"></script>
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/edit.css">
+    <link rel="stylesheet" href="../../css/footer_part.css">
+    <link rel="stylesheet" href="../../css/alertbox.css">
+</head>
+<body>
+<div id="show" class="show_once show">
+    <div class="switch">
+        <div class="edit-word">查看</div>
+    </div>
+    <div>
+        <dl>
+            <dt class="no_check">资源编号</dt>
+            <dd><input type="text" class="edit-num"></dd>
+        </dl>
+    </div>
+    <div>
+        <dl>
+            <dt class="no_check">资源名称</dt>
+            <dd><input type="text" class="edit-num"></dd>
+        </dl>
+        <dl class="author">
+            <dd class="clear"><span class="edit-word-long no_check">责任编辑 张三</span><span class="edit-word-long">日期 2016/09/29</span></dd>
+        </dl>
+    </div>
+    <div>
+        <div class="w_100">
+            <dl class="edit-banc">
+                <dt class='no_check'>学段<span>*</span></dt>
+                <dd>
+                    <div class="selectbox selebar selectbox_width126">
+                        <input name="" value="" type="hidden">
+                        <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                        <div class="selectbox_value_box"><div class="selectbox_value">请选择</div></div>
+                        <div class="selectbox_list selectbox_width126">
+                            <div class="selectbox_scroll_body">
+                                <div class="selectbox_scroll"><div></div></div>
+                            </div>
+                            <ul class="selectbox_body">
+                                <li data-value="0">所有</li>
+                                <li data-value="0" >音频频视频</li>
+                                <li data-value="0">视频</li>
+                                <li data-value="0">动画</li>
+                                <li data-value="0">所有</li>
+                                <li data-value="0" >画音频视频</li>
+                                <li data-value="0">视频</li>
+                                <li data-value="0">动画</li>
+                            </ul>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+            <dl class="edit-banc">
+                <dt class='no_check'>学科<span>*</span></dt>
+                <dd>
+                    <div class="selectbox selebar selectbox_width126">
+                        <input name="" value="" type="hidden">
+                        <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                        <div class="selectbox_value_box"><div class="selectbox_value">请选择</div></div>
+                        <div class="selectbox_list selectbox_width126">
+                            <div class="selectbox_scroll_body">
+                                <div class="selectbox_scroll"><div></div></div>
+                            </div>
+                            <ul class="selectbox_body">
+                                <li data-value="0">所有</li>
+                                <li data-value="0" >音频频视频</li>
+                                <li data-value="0">视频</li>
+                                <li data-value="0">动画</li>
+                                <li data-value="0">所有</li>
+                                <li data-value="0" >画音频视频</li>
+                                <li data-value="0">视频</li>
+                                <li data-value="0">动画</li>
+                            </ul>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+        <div class="w_100">
+            <dl class="edit-banc">
+                <dt class='no_check'>册次</dt>
+                <dd>
+                    <div class="selectbox selebar selectbox_width126">
+                        <input name="" value="" type="hidden">
+                        <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                        <div class="selectbox_value_box"><div class="selectbox_value">请选择</div></div>
+                        <div class="selectbox_list selectbox_width126">
+                            <div class="selectbox_scroll_body">
+                                <div class="selectbox_scroll"><div></div></div>
+                            </div>
+                            <ul class="selectbox_body">
+                                <li data-value="0">所有</li>
+                                <li data-value="0" >音频频视频</li>
+                                <li data-value="0">视频</li>
+                                <li data-value="0">动画</li>
+                                <li data-value="0">所有</li>
+                                <li data-value="0" >画音频视频</li>
+                                <li data-value="0">视频</li>
+                                <li data-value="0">动画</li>
+                            </ul>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+            <dl class="edit-banc">
+                <dt class='no_check'>版本<span>*</span></dt>
+                <dd>
+                    <div class="selectbox selebar selectbox_width126">
+                        <input name="" value="" type="hidden">
+                        <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                        <div class="selectbox_value_box"><div class="selectbox_value">请选择</div></div>
+                        <div class="selectbox_list selectbox_width126">
+                            <div class="selectbox_scroll_body">
+                                <div class="selectbox_scroll"><div></div></div>
+                            </div>
+                            <ul class="selectbox_body">
+                                <li data-value="0">所有</li>
+                                <li data-value="0" >音频频视频</li>
+                                <li data-value="0">视频</li>
+                                <li data-value="0">动画</li>
+                                <li data-value="0">所有</li>
+                                <li data-value="0" >画音频视频</li>
+                                <li data-value="0">视频</li>
+                                <li data-value="0">动画</li>
+                            </ul>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div>
+        <dl>
+            <dt class="no_check">章节</dt>
+            <dd class="selectbox_x">
+                <dl class="selectbox_l">
+                    <dd>
+                        <div class="selectbox selebar selectbox_width126">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                            <div class="selectbox_value_box"><div class="selectbox_value">章</div></div>
+                            <div class="selectbox_list selectbox_width126">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll"><div></div></div>
+                                </div>
+                                <ul class="selectbox_body">
+                                    <li data-value="0">所有</li>
+                                    <li data-value="0" >音频频视频</li>
+                                    <li data-value="0">视频</li>
+                                    <li data-value="0">动画</li>
+                                    <li data-value="0">所有</li>
+                                    <li data-value="0" >画音频视频</li>
+                                    <li data-value="0">视频</li>
+                                    <li data-value="0">动画</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </dd>
+                    <dd>
+                        <div class="selectbox selebar selectbox_width126">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                            <div class="selectbox_value_box"><div class="selectbox_value">节</div></div>
+                            <div class="selectbox_list selectbox_width126">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll"><div></div></div>
+                                </div>
+                                <ul class="selectbox_body">
+                                    <li data-value="0">所有</li>
+                                    <li data-value="0" >音频频视频</li>
+                                    <li data-value="0">视频</li>
+                                    <li data-value="0">动画</li>
+                                    <li data-value="0">所有</li>
+                                    <li data-value="0" >画音频视频</li>
+                                    <li data-value="0">视频</li>
+                                    <li data-value="0">动画</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </dd>
+                    <dd>
+                        <div class="selectbox selebar selectbox_width126">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                            <div class="selectbox_value_box"><div class="selectbox_value">目</div></div>
+                            <div class="selectbox_list selectbox_width126">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll"><div></div></div>
+                                </div>
+                                <ul class="selectbox_body">
+                                    <li data-value="0">所有</li>
+                                    <li data-value="0" >音频频视频</li>
+                                    <li data-value="0">视频</li>
+                                    <li data-value="0">动画</li>
+                                    <li data-value="0">所有</li>
+                                    <li data-value="0" >画音频视频</li>
+                                    <li data-value="0">视频</li>
+                                    <li data-value="0">动画</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </dd>
+                    <dd>
+                        <div class="selectbox selebar selectbox_width126">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                            <div class="selectbox_value_box"><div class="selectbox_value">课时</div></div>
+                            <div class="selectbox_list selectbox_width126">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll"><div></div></div>
+                                </div>
+                                <ul class="selectbox_body">
+                                    <li data-value="0">所有</li>
+                                    <li data-value="0" >音频频视频</li>
+                                    <li data-value="0">视频</li>
+                                    <li data-value="0">动画</li>
+                                    <li data-value="0">所有</li>
+                                    <li data-value="0" >画音频视频</li>
+                                    <li data-value="0">视频</li>
+                                    <li data-value="0">动画</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </dd>
+                </dl>
+            </dd>
+        </dl>
+    </div>
+    <div class='clearfix'>
+        <dl>
+            <dt class='no_check'>资源描述</dt>
+            <dd class="textarea"><textarea name="" ></textarea></dd>
+        </dl>
+    </div>
+    <div>
+        <div class="list-on btm_tjfh noline">
+            <button class="btn_tj">返回</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

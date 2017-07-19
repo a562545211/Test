@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="resourceInfo">
+
+    <select id="selectAll" resultType="com.jsrm.model.resourceInfo.ResourceInfo" parameterType="java.util.HashMap" >
+
+          select * from t_resource_info
+
+          <where>
+             <if test="empty neq resourceType">
+                AND resourceType = #{resourceType}
+             </if>
+          </where>
+
+    </select>
+
+    <select id="selectAllRes" resultType="com.jsrm.model.resourceInfo.ResourceInfo" parameterType="java.util.HashMap" >
+
+        select * from t_resource_info
+
+        <where>
+            <if test="empty neq id and id!=''">
+                AND id = #{id}
+            </if>
+            <if test="empty neq tResourceCode and tResourceCode!=''">
+                AND tResourceCode LIKE CONCAT('%',#{tResourceCode},'%')
+            </if>
+            <if test="empty neq resourceTopicCode and resourceTopicCode!=''">
+                AND resourceTopicCode LIKE CONCAT('%',#{resourceTopicCode},'%')
+            </if>
+            <if test="empty neq resourceFileCode and resourceFileCode!=''">
+                AND resourceFileCode LIKE CONCAT('%',#{resourceFileCode},'%')
+            </if>
+            <if test="empty neq resourceName and resourceName!=''">
+                AND resourceName LIKE CONCAT('%',#{resourceName},'%')
+            </if>
+            <if test="empty neq approver and approver!=''">
+            AND approver LIKE CONCAT('%',#{approver},'%')
+            </if>
+            <if test="empty neq createUserName and createUserName!=''">
+                AND createUserName LIKE CONCAT('%',#{createUserName},'%')
+            </if>
+            <if test="empty neq startTime and startTime!=''">
+                AND createDateTime &gt;= #{startTime}
+            </if>
+            <if test="empty neq endTime and endTime!=''">
+                AND createDateTime &lt;= DATE_FORMAT(#{endTime},'%Y-%m-%d 23:59:59.999')
+            </if>
+            <if test="state neq empty and state!=''">
+                AND state = #{state}
+            </if>
+            <if test="categoresCode neq empty and categoresCode!=''">
+                AND categoresCode LIKE '%${categoresCode}%'
+            </if>
+            <if test="knowledgeCode neq empty and knowledgeCode!=''">
+                AND knowledgeCode LIKE CONCAT('%',#{knowledgeCode},'%')
+            </if>
+            <if test="resourceType neq empty and resourceType!=''">
+                <!--AND  resourceType in-->
+                <!--<foreach collection="resourceType" separator="," item="item" open="(" close=")">-->
+                    <!--#{item}-->
+                <!--</foreach>-->
+                AND  resourceType = #{resourceType}
+            </if>
+            AND state != '0' AND resourceType != 'DRA'
+            and subjectId in (select dataAuthorityId from t_sys_mid_user_dataauthority_rel where userId = #{userId} and deep = '2')
+
+        </where>
+
+        ORDER BY createDateTime DESC
+
+    </select>
+
+    <select id="getNewResourceList" resultType="com.jsrm.model.resourceInfo.ResourceInfo" parameterType="java.util.HashMap" >
+
+        select * from t_resource_info
+
+        <where>
+            <if test="empty neq tResourceCode and tResourceCode!=''">
+                AND tResourceCode LIKE CONCAT('%',#{tResourceCode},'%')
+            </if>
+            <if test="empty neq resourceFileCode and resourceFileCode!=''">
+                AND resourceFileCode LIKE CONCAT('%',#{resourceFileCode},'%')
+            </if>
+            <if test="empty neq resourceName and resourceName!=''">
+                AND resourceName LIKE CONCAT('%',#{resourceName},'%')
+            </if>
+            AND resourceType = 'DRA'
+            AND resourceFileCode NOT IN (SELECT DISTINCT (t.resourceFileCode) FROM `t_resource_info` t WHERE t.resourceType = 'END' AND t.resourceFileCode IS NOT NULL)
+        </where>
+
+        ORDER BY createDateTime DESC
+
+    </select>
+
+    <select id="selectOne" resultType="com.jsrm.model.resourceInfo.ResourceInfo" parameterType="java.util.HashMap" >
+
+        select * from t_resource_info
+
+        <where>
+            <if test="empty neq id and id!=''">
+                AND id = #{id}
+            </if>
+            <if test="empty neq tResourceCode and tResourceCode!=''">
+                AND tResourceCode LIKE CONCAT('%',#{tResourceCode},'%')
+            </if>
+            <if test="empty neq resourceTopicCode and resourceTopicCode!=''">
+                AND resourceTopicCode LIKE CONCAT('%',#{resourceTopicCode},'%')
+            </if>
+            <if test="empty neq resourceFileCode and resourceFileCode!=''">
+                AND resourceFileCode LIKE CONCAT('%',#{resourceFileCode},'%')
+            </if>
+            <if test="empty neq resourceName and resourceName!=''">
+                AND resourceName LIKE CONCAT('%',#{resourceName},'%')
+            </if>
+            <if test="empty neq approver and approver!=''">
+                AND approver LIKE CONCAT('%',#{approver},'%')
+            </if>
+            <if test="empty neq createUserName and createUserName!=''">
+                AND createUserName LIKE CONCAT('%',#{createUserName},'%')
+            </if>
+            <if test="empty neq startTime and startTime!=''">
+                AND createDateTime &gt;= #{startTime}
+            </if>
+            <if test="empty neq endTime and endTime!=''">
+                AND createDateTime &lt;= DATE_FORMAT(#{endTime},'%Y-%m-%d 23:59:59.999')
+            </if>
+            <if test="state neq empty and state!=''">
+                AND state = #{state}
+            </if>
+            <if test="categoresCode neq empty and categoresCode!=''">
+                AND categoresCode LIKE '%${categoresCode}%'
+            </if>
+            <if test="knowledgeCode neq empty and knowledgeCode!=''">
+                AND knowledgeCode LIKE CONCAT('%',#{knowledgeCode},'%')
+            </if>
+            <if test="resourceType neq empty and resourceType!=''">
+                <!--AND  resourceType in-->
+                <!--<foreach collection="resourceType" separator="," item="item" open="(" close=")">-->
+                <!--#{item}-->
+                <!--</foreach>-->
+                AND  resourceType = #{resourceType}
+            </if>
+
+        </where>
+
+
+    </select>
+
+    <select id="selectOne2" resultType="com.jsrm.web.vo.ResourceInfoVo.ResourceInfoVo" parameterType="java.util.HashMap" >
+
+        select
+            i.id,
+            i.resourceType,
+            i.tResourceCodeId,
+            i.tResourceCode,
+            i.resourceName,
+            i.resourceTopicCode,
+            i.resourceFileCode,
+            i.draftTypeId,
+            i.draftTypeValue,
+            i.edition,
+            i.ISBN,
+            i.resourceTypeOneLevelId,
+            i.resourceTypeOneLevelValue,
+            i.resourceTypeTwoLevelId,
+            i.resourceTypeTwoLevelValue,
+            i.resourceFormatId,
+            i.resourceFormatValue,
+            i.wordCount,
+            i.timeCount,
+            i.mapCount,
+            i.resourceDes,
+            i.resourceMaker,
+            i.makerIntro,
+            i.useTarget,
+            i.resourceSource,
+            i.copyright,
+            i.yearMonth,
+            i.isAloneRes,
+            i.isOriginal,
+            i.isChinese,
+            i.resourceLevel,
+            i.isFree,
+            i.cost,
+            i.state,
+            i.createUserId,
+            i.createUserName,
+            i.createDateTime,
+            i.updateDateTime,
+            i.approverId,
+            i.approver,
+            i.categoresCode,
+            i.knowledgeCode,
+            i.phaseId,
+            i.phase,
+            i.subjectId,
+            i.subject,
+            i.fileSize,
+            i.fileName,
+            i.tFileId,
+            i.original,
+            i.deleteState,
+            i.isElectron,
+            i.isOutput,
+            f.filePath,
+            i.filePath as suffix,
+            f.state as changeState
+        from t_resource_info i left join t_resource_file f on f.tResourceId = i.id and f.fileType=2 where i.id = #{id}
+
+    </select>
+
+    <select id="getResourceCodeSeq" resultType="string" parameterType="java.util.HashMap" >
+
+        select IFNULL(SUBSTRING(MAX(resourceFileCode), 10),'000') from t_resource_info
+
+        <where>
+            <if test="empty neq tResourceCode">
+                AND resourceFileCode LIKE CONCAT(#{tResourceCode},'%')
+            </if>
+            <if test="empty neq resourceType">
+                AND resourceType = #{resourceType}
+            </if>
+
+        </where>
+    </select>
+
+    <insert id="saveResourceInfo" parameterType="com.jsrm.model.resourceInfo.ResourceInfo">
+        insert into
+        t_resource_info(
+        id,
+        resourceType,
+        tResourceCodeId,
+        tResourceCode,
+        resourceName,
+        draftTypeId,
+        draftTypeValue,
+        edition,
+        ISBN,
+        resourceTypeOneLevelId,
+        resourceTypeOneLevelValue,
+        resourceTypeTwoLevelId,
+        resourceTypeTwoLevelValue,
+        resourceFormatId,
+        resourceFormatValue,
+        wordCount,
+        timeCount,
+        mapCount,
+        resourceDes,
+        resourceMaker,
+        makerIntro,
+        useTarget,
+        resourceSource,
+        copyright,
+        yearMonth,
+        isAloneRes,
+        isOriginal,
+        isChinese,
+        resourceLevel,
+        isFree,
+        cost,
+        state,
+        createUserId,
+        createUserName,
+        createDateTime,
+        approverId,
+        approver,
+        categoresCode,
+        knowledgeCode,
+        phaseId,
+        phase,
+        subjectId,
+        subject,
+        fileSize,
+        fileName
+        )
+        values(
+        #{id},
+        #{resourceType},
+        #{tResourceCodeId},
+        #{tResourceCode},
+        #{resourceName},
+        #{draftTypeId},
+        #{draftTypeValue},
+        #{edition},
+        #{ISBN},
+        #{resourceTypeOneLevelId},
+        #{resourceTypeOneLevelValue},
+        #{resourceTypeTwoLevelId},
+        #{resourceTypeTwoLevelValue},
+        #{resourceFormatId},
+        #{resourceFormatValue},
+        #{wordCount},
+        #{timeCount},
+        #{mapCount},
+        #{resourceDes},
+        #{resourceMaker},
+        #{makerIntro},
+        #{useTarget},
+        #{resourceSource},
+        #{copyright},
+        #{yearMonth},
+        #{isAloneRes},
+        #{isOriginal},
+        #{isChinese},
+        #{resourceLevel},
+        #{isFree},
+        #{cost},
+        #{state},
+        #{createUserId},
+        #{createUserName},
+        #{createDateTime},
+        #{approverId},
+        #{approver},
+        #{categoresCode},
+        #{knowledgeCode},
+        #{phaseId},
+        #{phase},
+        #{subjectId},
+        #{subject},
+        #{fileSize},
+        #{fileName}
+        )
+    </insert>
+
+    <update id="updateResourceInfo" parameterType="java.util.HashMap">
+
+        UPDATE t_resource_info
+        <set>
+           <if test="resourceType neq empty ">
+               resourceType = #{resourceType},
+           </if>
+            <if test=" tResourceCodeId neq empty">
+                tResourceCodeId = #{tResourceCodeId},
+            </if>
+            <if test=" tResourceCode neq empty">
+                tResourceCode = #{tResourceCode},
+            </if>
+            <if test=" resourceName neq empty">
+                resourceName = #{resourceName},
+            </if>
+            <if test=" draftTypeId neq empty">
+                draftTypeId = #{draftTypeId},
+            </if>
+            <if test=" draftTypeValue neq empty">
+                draftTypeValue = #{draftTypeValue},
+            </if>
+            <if test=" edition neq empty">
+                edition = #{edition},
+            </if>
+            <if test=" ISBN neq empty">
+                ISBN = #{ISBN},
+            </if>
+            <if test=" resourceTypeOneLevelId neq empty">
+                resourceTypeOneLevelId = #{resourceTypeOneLevelId},
+            </if>
+            <if test=" resourceTypeOneLevelValue neq empty">
+                resourceTypeOneLevelValue = #{resourceTypeOneLevelValue},
+            </if>
+            <if test=" resourceTypeTwoLevelId neq empty">
+                resourceTypeTwoLevelId = #{resourceTypeTwoLevelId},
+            </if>
+            <if test=" resourceTypeTwoLevelValue neq empty">
+                resourceTypeTwoLevelValue = #{resourceTypeTwoLevelValue},
+            </if>
+            <if test=" resourceFormatId neq empty">
+                resourceFormatId = #{resourceFormatId},
+            </if>
+            <if test=" resourceFormatValue neq empty">
+                resourceFormatValue = #{resourceFormatValue},
+            </if>
+            <if test=" wordCount neq empty">
+                wordCount = #{wordCount},
+            </if>
+            <if test=" timeCount neq empty">
+                timeCount = #{timeCount},
+            </if>
+            <if test=" mapCount neq empty">
+                mapCount = #{mapCount},
+            </if>
+            <if test=" resourceDes neq empty">
+                resourceDes = #{resourceDes},
+            </if>
+            <if test=" resourceMaker neq empty">
+                resourceMaker = #{resourceMaker},
+            </if>
+            <if test=" makerIntro neq empty">
+                makerIntro = #{makerIntro},
+            </if>
+            <if test=" useTarget neq empty">
+                useTarget = #{useTarget},
+            </if>
+            <if test=" resourceSource neq empty">
+                resourceSource = #{resourceSource},
+            </if>
+            <if test=" copyright neq empty">
+                copyright = #{copyright},
+            </if>
+            <if test=" yearMonth neq empty">
+                yearMonth = #{yearMonth},
+            </if>
+            <if test=" isAloneRes neq empty">
+                isAloneRes = #{isAloneRes},
+            </if>
+            <if test=" isOriginal neq empty">
+                isOriginal = #{isOriginal},
+            </if>
+            <if test=" isAloneRes neq empty">
+                isAloneRes = #{isAloneRes},
+            </if>
+            <if test=" isChinese neq empty">
+                isChinese = #{isChinese},
+            </if>
+            <if test=" resourceLevel neq empty">
+                resourceLevel = #{resourceLevel},
+            </if>
+            <if test=" isFree neq empty">
+                isFree = #{isFree},
+            </if>
+            <if test=" cost neq empty">
+                cost = #{cost},
+            </if>
+            <if test=" isFree neq empty">
+                isFree = #{isFree},
+            </if>
+            <if test=" createUserId neq empty">
+                createUserId = #{createUserId},
+            </if>
+            <if test=" createUserName neq empty">
+                createUserName = #{createUserName},
+            </if>
+            <if test=" createDateTime neq empty">
+                createDateTime = #{createDateTime},
+            </if>
+            <if test="createUserName neq empty">
+                createUserName = #{createUserName},
+            </if>
+            <if test="approverId neq empty and approverId!=''">
+                approverId = #{approverId},
+            </if>
+            <if test=" approver neq empty and approver!=''">
+                approver = #{approver},
+            </if>
+            <if test=" categoresCode neq empty">
+                categoresCode = #{categoresCode},
+            </if>
+            <if test=" knowledgeCode neq empty">
+                knowledgeCode = #{knowledgeCode},
+            </if>
+            <if test=" phase neq empty">
+                phase = #{phase},
+            </if>
+            <if test="subject neq empty">
+                subject = #{subject},
+            </if>
+            <if test=" phaseId neq empty and phaseId!=''">
+                phaseId = #{phaseId},
+            </if>
+            <if test="subjectId neq empty and subjectId!=''">
+                subjectId = #{subjectId},
+            </if>
+            <if test="state neq empty and state!=''">
+                state = #{state},
+            </if>
+            <if test="resourceTopicCode neq empty and resourceTopicCode!=''">
+                resourceTopicCode = #{resourceTopicCode},
+            </if>
+            <if test="resourceFileCode neq empty and resourceFileCode!=''">
+                resourceFileCode = #{resourceFileCode},
+            </if>
+            <if test="fileSize neq empty and fileSize!=''">
+                fileSize = #{fileSize},
+            </if>
+            <if test="fileName neq empty and fileName!=''">
+                fileName = #{fileName},
+            </if>
+            <if test="filePath neq empty and filePath!=''">
+                filePath = #{filePath}
+            </if>
+            <if test="tFileId neq empty and tFileId!=''">
+                tFileId = #{tFileId}
+            </if>
+        </set>
+
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <!--中间表增加-->
+    <insert id="saveResourceMidCategories" parameterType="java.util.List" >
+        insert into t_resouce_mid_categories(id, busiId, tCategoriesId, categDeep) values
+        <foreach collection="list" item="item" open="(" close=")" separator="  ),( ">
+            #{item.id},#{item.busiId},#{item.tCategoriesId},#{item.categDeep}
+        </foreach>
+    </insert>
+    <!--中间表删除-->
+    <delete id="deleteResourceMidCategories" parameterType="string">
+        delete from t_resouce_mid_categories where busiId = #{busiId}
+    </delete>
+
+    <select id="selectOldResourceInfo" resultType="com.jsrm.model.resourceInfo.ResourceInfo" >
+        select * from t_resource_info where filePath like '%/2017%'
+    </select>
+
+    <select id="selectStorage" resultType="com.jsrm.model.resourceInfo.ResourceInfo" >
+        select id,filePath from t_resource_info where filePath like '%/storageAdd/%' limit 3
+    </select>
+
+</mapper>

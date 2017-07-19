@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="knowledge">
+
+    <select id="getKnowledge" resultType="com.jsrm.web.vo.catalog.BaseKnowledgeVo" parameterType="java.util.HashMap" >
+
+          select id,parentId pId,name,deep from t_base_knowledge
+          <where>
+              1=1
+              <if test="empty neq phaseId">
+                  AND phase_id = #{phaseId}
+              </if>
+              <if test="empty neq subjectId">
+                  AND subject_id = #{subjectId}
+              </if>
+                  AND flag = "0"
+          </where>
+
+    </select>
+
+    <insert id="saveKnowledge" keyProperty="id" parameterType="com.jsrm.model.catalog.BaseKnowledge">
+        INSERT  into t_base_knowledge (id,parentId,name,phase_id,subject_id,deep,flag) values(
+                    #{id},#{parentId},#{name},#{phaseId},#{subjectId},#{deep},#{flag})
+    </insert>
+
+    <update id="updateKnowledge" parameterType="com.jsrm.model.catalog.BaseKnowledge">
+        update t_base_knowledge set name = #{name} where id = #{id}
+    </update>
+
+    <update id="deleteKnowledge" parameterType="com.jsrm.model.catalog.BaseKnowledge">
+        update t_base_knowledge set flag = #{flag} where id = #{id}
+    </update>
+
+    <insert id="addKnowledge" keyProperty="id" parameterType="java.util.List">
+        INSERT  into t_base_knowledge (id,parentId,name) values
+        <foreach collection="list" item="item" open="(" close=")" separator="  ),( ">
+            #{item.id},#{item.pId},#{item.name}
+        </foreach>
+    </insert>
+
+    <select id="getKnowledgeAll" resultType="com.jsrm.model.catalog.BaseKnowledge" parameterType="java.util.HashMap" >
+
+        select * from t_base_knowledge
+
+        <where>
+            <if test="empty neq id">
+                AND id = #{id}
+            </if>
+            <if test="empty neq flag">
+                AND flag = #{flag}
+            </if>
+            <if test="empty neq parentId">
+                AND parentId = #{parentId}
+            </if>
+            <if test="empty neq deep">
+            AND deep = #{deep}
+            </if>
+            <if test="empty neq phaseId">
+                AND phase_id = #{phaseId}
+            </if>
+            <if test="empty neq subjectId">
+                AND subject_id = #{subjectId}
+            </if>
+            AND flag = "0"
+        </where>
+
+    </select>
+
+    <select id="getCategoriesBydeep" resultType="com.jsrm.model.catalog.Category" parameterType="java.util.HashMap" >
+
+        select * from t_base_categories
+
+        <where>
+            1=1
+            <if test="empty neq flag">
+                AND flag = #{flag}
+            </if>
+                AND deep in (1,2)
+        </where>
+
+    </select>
+
+    <select id="getKnowledges" resultType="com.jsrm.web.vo.catalog.BaseKnowledgeVo" parameterType="java.util.HashMap" >
+
+        select * from t_base_knowledge
+
+        <where>
+            <if test="empty neq id">
+                AND id = #{id}
+            </if>
+            <if test="empty neq ids">
+                AND id in
+                <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="empty neq flag">
+                AND flag = #{flag}
+            </if>
+            <if test="empty neq parentId">
+                AND parentId = #{parentId}
+            </if>
+            <if test="empty neq deep">
+                AND deep = #{deep}
+            </if>
+            <if test="empty neq phaseId">
+                AND phase_id = #{phaseId}
+            </if>
+            <if test="empty neq subjectId">
+                AND subject_id = #{subjectId}
+            </if>
+
+        </where>
+
+    </select>
+
+    <select id="getKnowledgeById" resultType="com.jsrm.web.vo.catalog.BaseKnowledgeVo" parameterType="java.util.HashMap" >
+
+        select * from t_base_knowledge
+        <where>
+            <if test="empty neq id">
+                AND id = #{id}
+            </if>
+        </where>
+
+    </select>
+</mapper>

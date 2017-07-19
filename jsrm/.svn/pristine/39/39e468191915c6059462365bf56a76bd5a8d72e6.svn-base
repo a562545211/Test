@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="resourceFile">
+
+	<insert id="saveResourceFile" parameterType="com.jsrm.model.resourceFile.ResourceFile">
+		INSERT INTO t_resource_file (id,tResourceId,fileType,fileName,filePath,createDate,state)
+		VALUES (#{id},#{tResourceId},#{fileType},#{fileName},#{filePath},#{createDate},#{state})
+  	</insert>
+  	
+  	<update id="updateResourceFile" parameterType="java.util.Map">
+	    update t_resource_file set 
+	    <if test="filePath != null and filePath != ''">
+	      filePath = #{filePath},
+	    </if>
+	    <if test="filePath == null ">
+	      count = count+1,
+	    </if>
+		<if test="state != null and state != ''">
+		  state = #{state}
+		</if>
+	    where tResourceId = #{tResourceId} AND fileType = #{fileType}
+  	</update>
+  	
+  	<select id="selectResourceFile" resultType="com.jsrm.model.resourceFile.ResourceFile" parameterType="map" >
+  		SELECT * FROM t_resource_file trf WHERE trf.tResourceId = #{tResourceId} AND trf.fileType = #{fileType}
+  	</select>
+  	
+  	<update id="updateTFileCycorePath" parameterType="java.util.Map">
+	    update t_file set
+	      cyFilePath = #{cyFilePath},state = 2
+	    where relateId = #{relateId}
+  	</update>
+
+	<delete id="deleteResourceFile" parameterType="java.util.Map">
+		delete from t_resource_file where tResourceId = #{tResourceId}
+	</delete>
+
+	<select id="selectStorage" resultType="com.jsrm.model.resourceFile.ResourceFile" parameterType="map" >
+		select id,filePath from t_resource_file where filePath like '%/storageAdd/%' limit 3
+	</select>
+
+	<update id="updateResourceFilePath" parameterType="java.util.Map">
+		update t_resource_file set filePath = #{filePath} where id = #{id}
+	</update>
+  	
+</mapper>

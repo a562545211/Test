@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>资源管理默认</title>
+    <script src="../../js/lib/jquery-1.12.1.js"></script>
+    <script src="../../js/public.js"></script>
+    <script src="../../js/app/reset.js"></script>
+    <link rel="stylesheet" href="../../css/jquery.selectbox.css">
+    <script src="../../js/lib/jquery.selectbox.js"></script>
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/edit.css">
+    <link rel="stylesheet" href="../../css/metroStyle/metroStyle.css">
+
+    <script type="text/javascript" src="../../js/lib/zTree/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="../../js/lib/zTree/jquery.ztree.excheck.js"></script>
+    <script type="text/javascript" src="../../js/lib/zTree/jquery.ztree.exedit.js"></script>
+    <script src="../../js/lib/urlParam.js"></script>
+    <script src="../../js/myApp/baseURL.js"></script>
+    <script type="text/javascript" src="../../js/lib/iztree.js"></script>
+    <script src="../../js/app/resource_mo.js"></script>
+    <script src="../../js/myApp/system/systemAdd.js"></script>
+</head>
+<body>
+<div class="show" style="padding: 0px;">
+    <!--<div class="switch">-->
+        <!--<div class="edit-word">系统管理</div>-->
+        <!--<a href="system.html" class="selected">用户管理</a>-->
+        <!--<a href="authority.html">权限管理</a>-->
+        <!--<a href="operateLog.html">操作日志</a>-->
+    <!--</div>-->
+    <div class="systemBrdr">
+        <dl>
+            <dt >用户名</dt>
+            <dd >
+                <input type="text" id="loginName">
+            </dd>
+        </dl>
+        <dl>
+            <dt >姓名</dt>
+            <dd >
+                <input type="text" id="username">
+            </dd>
+        </dl>
+        <!--<dl>-->
+            <!--<dt >默认密码</dt>-->
+            <!--<dd >-->
+                <!--<input type="text" id="password">-->
+            <!--</dd>-->
+        <!--</dl>-->
+        <dl>
+            <dt>角色</dt>
+            <div class="selecBox">
+                <dd>
+                    <div class='selectB'>
+                        <div class="selectbox">
+                            <input name="" value="" type="hidden" id="roleName">
+                            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                            <div class="selectbox_value_box"><div class="selectbox_value" id="roleN">请选择</div></div>
+                            <div class="selectbox_list selectbox_width120">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll"><div></div></div>
+                                </div>
+                                <ul class="selectbox_body" id="roleOption">
+                                    <!--<li data-value="0">资源编号</li>-->
+                                    <!--<li data-value="0">音频</li>-->
+                                    <!--<li data-value="0">视频</li>-->
+                                    <!--<li data-value="0">动画</li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </dd>
+            </div>
+        </dl>
+        <dl>
+            <dt >角色描述</dt>
+            <dd >
+                <input type="text" id="userDes">
+            </dd>
+        </dl>
+        <dl>
+            <dt>审核角色</dt>
+            <div class="perm-list" id="tree_show">
+                <!--资源管理-->
+
+            </div>
+        </dl>
+        <dl>
+            <dt>数据权限</dt>
+            <div class="zTreeDemoBackground left">
+                <ul id="categoryTree" class="ztree" style="width:230px;"></ul>
+            </div>
+        </dl>
+        <div class="btnBrdr">
+            <aside>
+                <button class="btn" id="OK" onclick="saveOrUpdate()">确定</button>
+                <button class="btn btn-grey" onclick="back()">返回</button>
+            </aside>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

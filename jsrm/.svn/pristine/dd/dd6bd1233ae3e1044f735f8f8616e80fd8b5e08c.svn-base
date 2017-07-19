@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/yulan.css">
+    <script src="../js/lib/jquery-1.12.1.js"></script>
+</head>
+<body>
+    <div class="wrap_audio">
+        <span class="video"></span>
+    </div>
+</body>
+</html>

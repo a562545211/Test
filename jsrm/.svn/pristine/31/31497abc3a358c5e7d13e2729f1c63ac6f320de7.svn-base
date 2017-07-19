@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编目管理查看</title>
+    <script src="../../js/lib/jquery-1.12.1.js"></script>
+    <script src="../../js/public.js"></script>
+    <script src="../../js/lib/urlParam.js"></script>
+    <script src="../../js/myApp/baseURL.js"></script>
+    <link rel="stylesheet" href="../../css/jquery.selectbox.css">
+    <script src="../../js/lib/jquery.selectbox.js"></script>
+    <script src="../../js/app/reset.js"></script>
+    <script src="../../js/lib/icategories.js"></script>
+    <script src="../../js/myApp/catalog/resourceCodeView.js"></script>
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/edit.css">
+    <link rel="stylesheet" href="../../css/footer_part.css">
+    <link rel="stylesheet" href="../../css/alertbox.css">
+    <link rel="stylesheet" href="../../css/resourceCodeView.css">
+</head>
+<body>
+<div id="show" class="show_once show">
+    <div class="switch">
+        <div class="edit-word">查看</div>
+    </div>
+    <div>
+        <dl>
+            <dt class="no_check">选题编号</dt>
+            <dd><input type="text" class="edit-num" id="code" readonly></dd>
+        </dl>
+    </div>
+    <div>
+        <dl>
+            <dt class="no_check">资源名称</dt>
+            <dd><input type="text" class="edit-num" id="name" readonly></dd>
+        </dl>
+        <dl class="author">
+            <dd class="clear">
+                <span class="edit-word-long no_check">责任编辑
+                    <span id="createUserName">张三</span>
+                </span>
+                <span class="edit-word-long">日期
+                    <span id="createTime">2016/09/29</span>
+                </span>
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <div class="w_100">
+            <dl class="edit-banc">
+                <dt class='no_check'>学段<span>*</span></dt>
+                <dd><input type="text" class="edit-num" id="show1" readonly></dd>
+            </dl>
+            <dl class="edit-banc">
+                <dt class='no_check'>学科<span>*</span></dt>
+                <dd><input type="text" class="edit-num" id="show2" readonly></dd>
+            </dl>
+        </div>
+    </div>
+    <div>
+        <div class="w_100">
+            <dl class="edit-banc">
+                <dt class='no_check'>版本<span>*</span></dt>
+                <dd><input type="text" class="edit-num" id="show3" readonly></dd>
+            </dl>
+            <dl class="edit-banc">
+                <dt class='no_check'>册次<span>*</span></dt>
+                <dd><input type="text" class="edit-num" id="show4" readonly></dd>
+            </dl>
+        </div>
+    </div>
+    <div>
+        <dl>
+            <dt class="no_check">章节</dt>
+            <dd class="selectbox_x">
+                <dl class="selectbox_l">
+                    <dd><input type="text" class="edit-num" id="show5" readonly></dd>
+                    <dd><input type="text" class="edit-num" id="show6" readonly></dd>
+                    <dd><input type="text" class="edit-num" id="show7" readonly></dd>
+                    <dd><input type="text" class="edit-num" id="show8" readonly></dd>
+                </dl>
+            </dd>
+        </dl>
+    </div>
+    <div class='clearfix'>
+        <dl>
+            <dt class='no_check'>资源描述</dt>
+            <dd class="textarea">
+                <textarea id="resoureDes" name="" readonly ></textarea>
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <div class="list-on btm_tjfh noline">
+            <button class="btn_tj" onclick="window.history.back(-1);">返回</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

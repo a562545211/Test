@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!--meta-->
+    <meta charset="UTF-8">
+    <!--title-->
+    <title>统计分析-资源统计-知识点统计</title>
+    <!--link-->
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/edit.css">
+    <link rel="stylesheet" href="../../css/jquery.datetimepicker.css">
+    <link rel="stylesheet" href="../../css/jquery.selectbox.css">
+    <link rel="stylesheet" href="../../css/newStatistics_knowledge.css">
+    <link rel="stylesheet" href="../../css/newStatistics.css">
+    <!--script-->
+    <script src="../../js/lib/jquery-1.12.1.js"></script>
+    <script src="../../js/public.js"></script>
+    <script src="../../js/app/reset.js"></script>
+    <script src="../../js/lib/jquery.selectbox.js"></script>
+    <script src="../../js/lib/jquery.datetimepicker.js"></script>
+    <script src="../../js/myApp/baseURL.js"></script>
+    <!--<script src="../../js/myApp/newStatistics_classification/phasesubject.js"></script>-->
+    <script src="../../js/myApp/newStatistics_classification/statistics_knowledge.js"></script>
+</head>
+<body>
+<div class="main">
+    <!--nav-->
+    <!--<div class="topic clearfix">-->
+        <!--<ul class="topic_nav">-->
+            <!--<li class="selected"><a href="statistics_analysis.html">资源统计</a></li>-->
+            <!--<li ><a href="statistics_classification.html">工作量统计</a></li>-->
+        <!--</ul>-->
+        <!--<a href="#" class="btn-normal fr">导出全部</a>-->
+    <!--</div>-->
+    <!--second-nav-->
+    <div class="topic clearfix">
+        <ul class="topic_nav">
+            <li><a href="statistics_analysis.html">章节统计</a></li>
+            <li class="selected"><a href="#">知识点统计</a></li>
+        </ul>
+        <a href="#" class="btn-normal fr">导出全部</a>
+    </div>
+    <!--学段和学科选择-->
+    <div class="clearfix phasesubject">
+        <div class="phase fl">学段选择</div>
+        <div class="fl selectbox selebar selectbox_width126" id="phasesubject1">
+            <input name="" value="" type="hidden">
+            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+            <div class="selectbox_value_box"><div class="selectbox_value">全部</div></div>
+            <div class="selectbox_list selectbox_width126">
+                <div class="selectbox_scroll_body">
+                    <div class="selectbox_scroll"><div></div></div>
+                </div>
+                <ul class="selectbox_body">
+                    <!--<li data-value="0">小学</li>-->
+                    <!--<li data-value="0">初中</li>-->
+                    <!--<li data-value="0">高中</li>-->
+                </ul>
+            </div>
+        </div>
+        <div class="subject fl">学科选择</div>
+        <div class="fl selectbox selebar selectbox_width126" id="phasesubject2">
+            <input name="" value="" type="hidden">
+            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+            <div class="selectbox_value_box"><div class="selectbox_value">全部</div></div>
+            <div class="selectbox_list selectbox_width126">
+                <div class="selectbox_scroll_body">
+                    <div class="selectbox_scroll"><div></div></div>
+                </div>
+                <ul class="selectbox_body">
+                    <!--<li data-value="0">语文</li>-->
+                    <!--<li data-value="0">数学</li>-->
+                    <!--<li data-value="0">化学</li>-->
+                    <!--<li data-value="0">英语</li>-->
+                    <!--<li data-value="0">体育</li>-->
+                </ul>
+            </div>
+        </div>
+        <span class="btn-normal btn-statistics fr">统计</span>
+    </div>
+    <!--默认显示-->
+    <p class="mo_show">请选择学科和学段</p>
+    <!--main_con-->
+    <div class="main_con clearfix">
+        <!--list_nav-->
+        <p class="phaseSubjectKnowledge">初中数学知识点</p>
+        <div class="main_con_left list_nav">
+            <div class="node clearfix allParent">
+                <!--<div class="tree first_ceng">数与式</div>-->
+                <!--<ul class="node first_ceng_node">-->
+                    <!--<li>-->
+                        <!--<div class="tree second_ceng">有理数</div>-->
+                        <!--<ul class="node second_ceng_node">-->
+                            <!--<li>-->
+                                <!--<div class="tree third_ceng">正数和负数</div>-->
+                                <!--<ul class="node third_ceng_node">-->
+                                    <!--<li>-->
+                                        <!--<div class="tree">正数的定义</div>-->
+                                        <!--<div class="tree">负数的定义</div>-->
+                                    <!--</li>-->
+                                <!--</ul>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
+                <!--</ul>-->
+                <!--<div class="tree first_ceng">方程与不等式</div>-->
+                <!--<ul class="node first_ceng_node">-->
+                    <!--<li>-->
+                        <!--<div class="tree second_ceng">方程</div>-->
+                        <!--<ul class="node second_ceng_node">-->
+                            <!--<li>-->
+                                <!--<div class="tree third_ceng">方程的定义</div>-->
+                                <!--<ul class="node third_ceng_node">-->
+                                    <!--<li>-->
+                                        <!--<div class="tree">一元一次方程</div>-->
+                                        <!--<div class="tree">一元二次方程</div>-->
+                                    <!--</li>-->
+                                <!--</ul>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            </div>
+        </div>
+        <!--wrap_table-->
+        <div class="wrap_table wrap_table_01">
+            <div class="wrap_table_left">
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+            <div class="table_head table_head_01">
+                <!--<span>初中数学知识点</span>-->
+                <!--<span> > </span>-->
+                <!--<span>数与式</span>-->
+            </div>
+            <div class="table_head table_head_02">
+                <!--<span>初中数学知识点</span>-->
+                <!--<span> > </span>-->
+                <!--<span>数与式</span>-->
+                <!--<span> > </span>-->
+                <!--<span>有理数</span>-->
+            </div>
+            <div class="table_head table_head_03">
+                <!--<span>初中数学知识点</span>-->
+                <!--<span> > </span>-->
+                <!--<span>数与式</span>-->
+                <!--<span> > </span>-->
+                <!--<span>有理数</span>-->
+                <!--<span> > </span>-->
+                <!--<span>正数和负数</span>-->
+            </div>
+            <div class="table_head table_head_04">
+                <!--<span>初中数学知识点</span>-->
+                <!--<span> > </span>-->
+                <!--<span>数与式</span>-->
+                <!--<span> > </span>-->
+                <!--<span>有理数</span>-->
+                <!--<span> > </span>-->
+                <!--<span>正数和负数</span>-->
+                <!--<span> > </span>-->
+                <!--<span class="table_on">负数的定义</span>-->
+            </div>
+            <div class="wrap_table_right">
+                <div class="table_right table_right_01">
+                    <table  cellpadding="0" cellspacing="0" class="table_01">
+                        <tr>
+                            <th><span>总计</span></th>
+                            <th><span>课件</span></th>
+                            <th><span>微课</span></th>
+                            <th><span>教学设计</span></th>
+                            <th><span>同步练习</span></th>
+                            <th><span>素材</span></th>
+                            <th><span>学案</span></th>
+                            <th><span>教师用书</span></th>
+                            <th><span>电子课本</span></th>
+                            <th><span>课标及解读</span></th>
+                            <th><span>电子课本</span></th>
+                            <th><span>教学视频</span></th>
+                            <th><span>拓展练习</span></th>
+                            <th><span>教学指导与研究</span></th>
+                            <th><span>实验</span></th>
+                            <th><span>中考</span></th>
+                            <th><span>高考</span></th>
+                            <th><span>小学竞赛</span></th>
+                            <th><span>高中竞赛</span></th>
+                            <th><span>知识讲解</span></th>
+                            <th><span>学习视频</span></th>
+                            <th><span>课文全解</span></th>
+                            <th><span>时政要点</span></th>
+                            <th><span>实践教育</span></th>
+                            <th><span>名词解释</span></th>
+                        </tr>
+                        <!--<tr>-->
+                            <!--<td><span>1111</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                        <!--</tr>-->
+                    </table>
+                </div>
+                <div class="table_right table_right_02">
+                    <table  cellpadding="0" cellspacing="0" class="table_02">
+                        <tr>
+                            <th><span>总计</span></th>
+                            <th><span>课件</span></th>
+                            <th><span>微课</span></th>
+                            <th><span>教学设计</span></th>
+                            <th><span>同步练习</span></th>
+                            <th><span>素材</span></th>
+                            <th><span>学案</span></th>
+                            <th><span>教师用书</span></th>
+                            <th><span>电子课本</span></th>
+                            <th><span>课标及解读</span></th>
+                            <th><span>电子课本</span></th>
+                            <th><span>教学视频</span></th>
+                            <th><span>拓展练习</span></th>
+                            <th><span>教学指导与研究</span></th>
+                            <th><span>实验</span></th>
+                            <th><span>中考</span></th>
+                            <th><span>高考</span></th>
+                            <th><span>小学竞赛</span></th>
+                            <th><span>高中竞赛</span></th>
+                            <th><span>知识讲解</span></th>
+                            <th><span>学习视频</span></th>
+                            <th><span>课文全解</span></th>
+                            <th><span>时政要点</span></th>
+                            <th><span>实践教育</span></th>
+                            <th><span>名词解释</span></th>
+                        </tr>
+                        <!--<tr>-->
+                            <!--<td><span>1111</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                        <!--</tr>-->
+                    </table>
+                </div>
+                <div class="table_right table_right_03">
+                    <table  cellpadding="0" cellspacing="0" class="table_03">
+                        <tr>
+                            <th><span>总计</span></th>
+                            <th><span>课件</span></th>
+                            <th><span>微课</span></th>
+                            <th><span>教学设计</span></th>
+                            <th><span>同步练习</span></th>
+                            <th><span>素材</span></th>
+                            <th><span>学案</span></th>
+                            <th><span>教师用书</span></th>
+                            <th><span>电子课本</span></th>
+                            <th><span>课标及解读</span></th>
+                            <th><span>电子课本</span></th>
+                            <th><span>教学视频</span></th>
+                            <th><span>拓展练习</span></th>
+                            <th><span>教学指导与研究</span></th>
+                            <th><span>实验</span></th>
+                            <th><span>中考</span></th>
+                            <th><span>高考</span></th>
+                            <th><span>小学竞赛</span></th>
+                            <th><span>高中竞赛</span></th>
+                            <th><span>知识讲解</span></th>
+                            <th><span>学习视频</span></th>
+                            <th><span>课文全解</span></th>
+                            <th><span>时政要点</span></th>
+                            <th><span>实践教育</span></th>
+                            <th><span>名词解释</span></th>
+                        </tr>
+                        <!--<tr>-->
+                            <!--<td><span>1111</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                        <!--</tr>-->
+                    </table>
+                </div>
+                <div class="table_right table_right_04">
+                    <table  cellpadding="0" cellspacing="0" class="table_04">
+                        <tr>
+                            <th><span>总计</span></th>
+                            <th><span>课件</span></th>
+                            <th><span>微课</span></th>
+                            <th><span>教学设计</span></th>
+                            <th><span>同步练习</span></th>
+                            <th><span>素材</span></th>
+                            <th><span>学案</span></th>
+                            <th><span>教师用书</span></th>
+                            <th><span>电子课本</span></th>
+                            <th><span>课标及解读</span></th>
+                            <th><span>电子课本</span></th>
+                            <th><span>教学视频</span></th>
+                            <th><span>拓展练习</span></th>
+                            <th><span>教学指导与研究</span></th>
+                            <th><span>实验</span></th>
+                            <th><span>中考</span></th>
+                            <th><span>高考</span></th>
+                            <th><span>小学竞赛</span></th>
+                            <th><span>高中竞赛</span></th>
+                            <th><span>知识讲解</span></th>
+                            <th><span>学习视频</span></th>
+                            <th><span>课文全解</span></th>
+                            <th><span>时政要点</span></th>
+                            <th><span>实践教育</span></th>
+                            <th><span>名词解释</span></th>
+                        </tr>
+                        <!--<tr>-->
+                            <!--<td><span>1111</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                            <!--<td><span>20</span></td>-->
+                        <!--</tr>-->
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

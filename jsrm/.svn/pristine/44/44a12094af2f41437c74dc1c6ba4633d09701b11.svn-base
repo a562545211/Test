@@ -1,0 +1,12 @@
+{
+	"status": 0,
+	"message": "查询成功",
+	"data": [
+		{
+			"finalsiza": 0,
+			"finaltime": 0,
+			"finalword": 0,
+			"topicfinal": 2
+		}
+	]
+}

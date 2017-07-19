@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/edit.css">
+    <script src="../../js/lib/jquery-1.12.1.js"></script>
+    <script src="../../js/public.js"></script>
+    <script src="../../js/myApp/baseURL.js"></script>
+    <script src="../../js/myApp/person/person.js"></script>
+    <script src="../../../js/operate.js"></script>
+    <script src="../../js/myApp/baseURL.js"></script>
+    <script src="../../js/lib/urlParam.js"></script>
+    <script type="text/javascript">
+    	var itemid = $.getUrlParam("itemId");
+    	var mapo ={"我要上传":"sc","我要发稿":"fg","我要审核":"sh"};
+    	$(function () {
+	    	var result = $.getOperateByType({
+	            "itemId":itemid,
+	            "type":['bar'],
+	            "path":'/'
+	        });
+	    	if(result&&result.bar){
+	    		for(var i=0;i<result.bar.length;i++){
+    				$("#"+mapo[$.trim(result.bar[i].operatetitle)]).append("<a href='javascript:void(0)' onclick='"+result.bar[i].operatemethod+"(this)' class='person_btn'>"+result.bar[i].operatetitle+"</a>");
+    			}
+	    	}
+    	});
+    	function upload(obj){
+            $this = $(obj);
+    		window.location.href="../resource/up_orig.html?itemId=1";
+    	}
+    	function exportfg(){
+    		window.location.href="../topic/setTopic.html?itemId=2";
+    	}
+    	function myCheck(){
+    		window.location.href="../top.html?itemId=15&itemName=%u8D44%u6E90%u5BA1%u6838&item2id=3";
+    	}
+    </script>
+</head>
+<body>
+<div class="person_show">
+    <div id="sc">
+        <div class="personTit">上传管理</div>
+        <ul>
+            <li>
+                <a href="../resource/resource.html?state=1&itemId=1">
+                    <span class="person_nav">待提交</span>
+                    <span class="gt"></span>
+                    <span class="person_num_sc"></span>
+                </a>
+            </li>
+            <li>
+                <a href="../resource/resource.html?state=2&itemId=1">
+                    <span class="person_nav">待审核</span>
+                    <span class="gt"></span>
+                    <span class="person_num_sc"></span>
+                </a>
+            </li>
+            <li>
+                <a href="../resource/resource.html?state=4&itemId=1">
+                    <span class="person_nav">不通过</span>
+                    <span class="gt"></span>
+                    <span class="person_num_sc"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div id="fg">
+        <div class="personTit">选题发稿</div>
+        <ul>
+            <li>
+                <a href="../topic/topic.html?state=1&itemId=2">
+                    <span class="person_nav">待提交</span>
+                    <span class="gt"></span>
+                    <span class="person_num_fa"></span>
+                </a>
+            </li>
+            <li>
+                <a href="../topic/topic.html?state=2&itemId=2">
+                    <span class="person_nav">待复审</span>
+                    <span class="gt"></span>
+                    <span class="person_num_fa"></span>
+                </a>
+            </li>
+            <li>
+                <a href="../topic/topic.html?state=2&itemId=2">
+                    <span class="person_nav">待终审</span>
+                    <span class="gt"></span>
+                    <span class="person_num_fa"></span>
+                </a>
+            </li>
+            <li>
+                <a href="../topic/topic.html?state=4&itemId=2">
+                    <span class="person_nav">已退回</span>
+                    <span class="gt"></span>
+                    <span class="person_num_fa"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div id="sh">
+        <div class="personTit">资源审核</div>
+        <ul>
+            <li>
+                <a href="../top.html?itemId=15&itemName=%u8D44%u6E90%u5BA1%u6838&item2id=3&changepage=vetting/topicVetting.html">
+                    <span class="person_nav">上传待审核</span>
+                    <span class="gt"></span>
+                    <span class="person_num_sh"></span>
+                </a>
+            </li>
+            <li>
+                <a href="../top.html?itemId=15&itemName=%u8D44%u6E90%u5BA1%u6838&item2id=4&changepage=vetting/topicVetting.html">
+                    <span class="person_nav">发稿待复审</span>
+                    <span class="gt"></span>
+                    <span class="person_num_sh"></span>
+                </a>
+            </li>
+            <li>
+                <a href="../top.html?itemId=15&itemName=%u8D44%u6E90%u5BA1%u6838&item2id=4&changepage=vetting/topicVetting.html">
+                    <span class="person_nav">发稿待终审</span>
+                    <span class="gt"></span>
+                    <span class="person_num_sh"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

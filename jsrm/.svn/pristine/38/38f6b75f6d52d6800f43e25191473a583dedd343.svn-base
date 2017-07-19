@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userManager">
+
+    <select id="selectUserListForPage" resultType="com.jsrm.web.vo.user.UserVo" parameterType="map" >
+
+        SELECT
+        u.id id,
+        u.loginName loginName,
+        u.username username,
+        tsr.ROLENAME roleName
+        FROM
+        t_user u
+        LEFT JOIN t_sys_mid_user_role_rel tsm ON tsm.USERID = u.id
+        LEFT JOIN t_sys_role tsr ON tsr.ID = tsm.ROLEID
+        WHERE
+        1 = 1
+        <if test=" empty neq roleId ">
+        AND tsm.ROLEID LIKE '%${roleId}%'
+        </if>
+        <if test=" empty neq roleName ">
+            AND tsr.ROLENAME LIKE '%${roleName}%'
+        </if>
+        <if test=" empty neq loginName and loginName !=''">
+            AND u.loginName LIKE '%${loginName}%'
+        </if>
+        <if test=" empty neq username ">
+            AND u.username LIKE '%${username}%'
+        </if>
+        AND u.state = 1
+        ORDER BY u.createtime DESC
+
+    </select>
+
+    <select id="selectUserOne" resultType="com.jsrm.web.vo.user.UserVo" parameterType="map" >
+
+        SELECT
+        u.id id,
+        u.loginName loginName,
+        u.username username,
+        tsr.ROLENAME roleName,
+        u.password password,
+        tsr.ID roleId,
+        u.userDes userDes,
+        u.dictCode dictCode
+        FROM
+        t_user u
+        LEFT JOIN t_sys_mid_user_role_rel tsm ON tsm.USERID = u.id
+        LEFT JOIN t_sys_role tsr ON tsr.ID = tsm.ROLEID
+        WHERE
+        1 = 1
+        <if test=" empty neq id ">
+            AND u.id =  #{id}
+        </if>
+
+    </select>
+
+    <select id="selectUserByLoginName" resultType="com.jsrm.web.vo.user.UserVo" parameterType="map" >
+
+        SELECT
+          *
+        FROM
+        t_user
+        WHERE
+        1 = 1
+        <if test=" empty neq loginName ">
+            AND loginName =  #{loginName}
+        </if>
+
+        AND state='1'
+
+    </select>
+
+    <select id="selectUserByLoginNameAndId" resultType="com.jsrm.web.vo.user.UserVo" parameterType="map" >
+
+        SELECT
+          *
+        FROM
+        t_user
+        WHERE
+        1 = 1
+        <if test=" empty neq loginName ">
+            AND loginName =  #{loginName}
+        </if>
+        <if test=" empty neq id ">
+            AND id =  #{id}
+        </if>
+
+    </select>
+
+    <select id="queryUserDataAuthority" resultType="com.jsrm.model.system.UserDataAuthority"  parameterType="map">
+       SELECT * FROM  t_sys_mid_user_dataauthority_rel WHERE userId = #{id} AND deep !=0
+    </select>
+    <select id="queryUserDataAuthorityByPhaseId" resultType="com.jsrm.model.system.UserDataAuthority"  parameterType="map">
+        SELECT * FROM  t_sys_mid_user_dataauthority_rel WHERE userId = #{id}
+        <if test="empty neq parentId">
+            AND parentId = #{parentId}
+        </if>
+    </select>
+
+    <update id="updateUserDataAuthority" parameterType="map">
+        UPDATE t_sys_mid_user_dataauthority_rel
+        <set>
+            <if test=" name != null and name != '' ">
+              name = #{name}
+            </if>
+        </set>
+        WHERE dataAuthorityId = #{id}
+    </update>
+
+    <delete id="delUserDataAuthority" parameterType="map">
+        DELETE FROM  t_sys_mid_user_dataauthority_rel WHERE userId = #{id}
+    </delete>
+
+    <select id="queryRole" resultType="com.jsrm.web.vo.role.RoleVo" parameterType="java.util.HashMap">
+        select * from t_sys_role where delflag = 0  order by createDate desc
+    </select>
+
+    <select id="queryDict" resultType="com.jsrm.model.sysdict.SysDict" parameterType="java.util.HashMap">
+        select * from t_sys_dict where state = 1 AND type = 'approveRole'
+    </select>
+
+    <insert id="saveUserManager" keyProperty="id" parameterType="com.jsrm.web.vo.user.UserVo">
+        INSERT  into t_user (id,loginName,password,username,createtime,state,userDes,dictCode) values(
+        #{id},#{loginName},#{password},#{username},#{createtime},#{state},#{userDes},#{dictCode})
+    </insert>
+
+    <insert id="saveUserRole" keyProperty="id" parameterType="com.jsrm.model.system.UserRole">
+        INSERT  into t_sys_mid_user_role_rel (ID,ROLEID,USERID) values(#{id},#{roleId},#{userId})
+    </insert>
+
+    <insert id="saveUserDataAuthority" keyProperty="id" parameterType="java.util.List">
+        INSERT  into t_sys_mid_user_dataauthority_rel (id,userId,dataAuthorityId,deep,parentId,name) values
+        <foreach collection="list" item="item" open="(" close=")" separator="  ),( ">
+            #{item.id},#{item.userId},#{item.dataAuthorityId},#{item.deep},#{item.parentId},#{item.name}
+        </foreach>
+    </insert>
+
+    <update id="updateUser" parameterType="com.jsrm.web.vo.user.UserVo">
+        update t_user
+        <set>
+            <if test=" loginName != null and loginName != '' ">
+                loginName = #{loginName},
+            </if>
+            <if test=" username != null and username != '' ">
+                username = #{username},
+            </if>
+            <if test=" userDes != null and userDes != '' ">
+                userDes = #{userDes},
+            </if>
+                dictCode = #{dictCode},
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateUserRole" parameterType="com.jsrm.web.vo.user.UserVo">
+        update t_sys_mid_user_role_rel
+        <set>
+            <if test="roleId != null and roleId != ''  ">
+                ROLEID = #{roleId},
+            </if>
+        </set>
+        where USERID = #{id}
+    </update>
+
+    <update id="resetPassword" parameterType="com.jsrm.web.vo.user.UserVo">
+        update t_user set password = #{password} where id = #{id}
+    </update>
+
+    <update id="modifyPass" parameterType="com.jsrm.web.vo.user.UserVo">
+        update t_user set password = #{password} where id = #{id}
+    </update>
+
+    <update id="deleteUser" parameterType="com.jsrm.web.vo.user.UserVo">
+        update t_user set state = #{state} where id = #{id}
+    </update>
+    <update id="delUserByIds"  parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            UPDATE t_user
+            <set>
+                state = 0
+            </set>
+            <where>
+                id =#{item.id}
+            </where>
+
+        </foreach>
+    </update>
+
+    <update id="resetPasswordByids" parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            UPDATE t_user
+            <set>
+                password = '670B14728AD9902AECBA32E22FA4F6BD'
+            </set>
+            <where>
+                id =#{item.id}
+            </where>
+
+        </foreach>
+    </update>
+
+
+</mapper>

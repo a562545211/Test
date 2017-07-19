@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>权限管理</title>
+    <script src="../../js/lib/jquery-1.12.1.js"></script>
+    <script src="../../js/lib/pagination.js"></script>
+    <script src="../../js/app/reset.js"></script>
+    <script src="../../js/myApp/baseURL.js"></script>
+    <script src="../../js/myApp/geCheckboxIds.js"></script>
+    <script src="../../js/lib/urlParam.js"></script>
+    <link rel="stylesheet" href="../../css/jquery.selectbox.css">
+    <script src="../../js/lib/jquery.selectbox.js"></script>
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/edit.css">
+    <script src="../../js/app/resource_mo.js"></script>
+    <script src="../../js/myApp/role/role.js"></script>
+    <script src="../../../js/operate.js"></script>
+    <script src="../../js/myApp/getOperate.js"></script>
+    <style>
+        #roleForm{
+            padding-top:20px;
+            padding-left: 10px;
+            background-color: white;
+            display: block;
+            height: 50px;
+        }
+    </style>
+    <script>
+        $(function(){
+            checkAll("resource");
+        })
+        
+    </script>
+</head>
+<body>
+<div class="show" style="padding: 0px;">
+    <!--<div class="delBrdr">-->
+        <!--<div class="edit-word">系统管理</div>-->
+        <!--&lt;!&ndash;<a href="system.html">用户管理</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;<a href="authority.html" class="selected">权限管理</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;<a href="operateLog.html">操作日志</a>&ndash;&gt;-->
+    <!--</div>-->
+    <form id="roleForm" name="roleForm"  class="resource">
+        <dl>
+            <dt class='text_r' >角色名称</dt>
+            <dd>  <input type="text" id="roleName" name="roleName" class="ipt" value=""></dd>
+        </dl>
+        <button class="btn" type="button" id="queryRoleButton">查询</button>
+        <button class="btn btn-grey" type="button" id="clear">重置</button>
+    </form>
+    <div class="delBrdr" id="toolbar1">
+
+        <!-- 	            <button class="btn">批量删除</button> -->
+        <!-- 	            <button class="btn" type="button" id="addButton">新增角色</button> -->
+    </div>
+    <div class="wrap_table wrap_table_01" id="resource">
+<!--         <div class="delBrdr2"> -->
+<!--             <button class="btn">新增角色</button> -->
+<!--         </div> -->
+       		<div style="padding-top:15px;padding-left:10px;"></div>
+     	<!--<div class="btnBrdr">-->
+            <!--<aside>-->
+            <!--</aside>-->
+        <!--</div>-->
+        <table  cellpadding="0" cellspacing="0" class="table_01" id="roleTable">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" class="all-check"></th>
+                    <!--<th>序号</th>-->
+                    <th>角色名称</th>
+                    <th>角色描述</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <div class="delBrdr">
+        	<div id="toolbar">
+<!-- 	            <button class="btn">批量删除</button> -->
+            </div>
+           <div class="delBrdr">
+            <div class="page" id="page">
+                <div class="pageLft">
+                    <!--<a class="noprev"></a>-->
+                    <a href="#" class="prev"></a>
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <span>...</span>
+                    <a href="#" class="next"></a>
+                    <!--<a class="nonext"></a>-->
+                </div>
+                <div class="pageRht">共<span id="totalPage">100</span>页，到第 <input type="text" id="toPage">页 <button onclick="searchPage();">确定</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</body>
+</html>

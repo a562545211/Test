@@ -1,0 +1,136 @@
+.alertboxB{
+    position:fixed;
+    top:0;
+    left:0;
+    bottom: 0;
+    right:0;
+    background:rgba(0,0,0,0.35);
+    display: none;
+    color:#666666;
+    z-index: 1993;
+}
+.alertbox,.alertbox1{
+    width:472px;
+    height:330px;
+    background: white;
+    padding:0 16px 6px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0.5px 0.5px 2px 0.5px #dadada;
+    margin:10% auto 0;
+}
+.alertbox h3,.alertbox1 h3{line-height:46px;text-align: left;}
+.alert_sousuo{width:100%;height:32px;line-height:32px;margin-bottom:16px;}
+.alertbox .selectbox.selebar{margin:0;float: left;text-align: left;}
+.alertbox input[type=text]{width:240px;height:30px;float:left;border:1px solid #e9e9e9;margin-left:10px;}
+.alertbox button{
+    float:right;
+    margin:0;
+}
+.alertbox table{
+    width:100%;
+}
+.alertbox .wrap_table{ float: none;}
+.alertbox button.btn_qd{float:none;margin:0 auto}
+.alertbox .wrap_table th:first-child{width:35px;  }
+.alertbox input[type='radio']{margin:0}
+
+
+.alertbox1{
+    width:400px;
+    height:340px;
+}
+
+.alertbox1>span{
+    line-height:30px;
+    float:left;
+    margin-right:20px;
+}
+.alertbox1 .selectbox.selebar{margin:0;float:left;text-align: left;}
+.alertbox1 .selectbox.selebar.sel_r{margin-right:40px;}
+.alertbox1 .selectbox.selebar{margin-bottom:16px;}
+.alertbox1 button.btn_qd,.alertbox1 button.btn_qx{float:none;margin:12px 24px;}
+.alertbox1 button.btn_qx{background:#AAAAAA}
+
+
+.alertbox2{width:240px;}
+.alertbox2 h3{ text-align: center}
+.alertbox2 input[type=text]{margin-left:0;width:140px}
+.alertbox2 .wrap_table th:first-child{width:35px;}
+.alertbox2 input[type='radio']{margin:0}
+
+.alertbox3{height:390px;}
+.alertbox4{width:420px;height:360px;overflow-x:hidden;overflow-y:auto;}
+.alert_word{width:28px;text-align: left;}
+.alertbox3 .selectbox.selebar.sel_long_r,.alertbox4 .selectbox.selebar.sel_long_r{margin-right:150px}
+.alertboxB.deleteB{
+    display:block
+}
+.deletebox{
+    height:200px;margin-top:15%;
+}
+.deletebox span{
+    width:100%;line-height:20px;margin:50px 0;
+}
+.alertboxB.commitB{
+    display:block
+}
+.commitbox{
+    width:285px;
+    height:59px;
+    margin:0 auto;
+    background:none;
+    background:url("../images/shangc.png") no-repeat;
+    margin-top:15%;
+    padding:0;
+    box-shadow: none;
+    padding:71px 0 0 16px;
+    position: relative;
+}
+.up_jindu{
+    position: absolute;
+    top:115px;
+    left:5px;
+    width:285px;
+    text-align: center;
+    color:rgb(156,240,255)
+}
+.bar{
+    width:234px;
+    height:24px;
+    /*background:url("../images/jind.png") no-repeat;*/
+    float: left;
+}
+.jindu{
+    height:24px;
+    width:0;
+    background:rgb(32,179,201);
+}
+.commitbox span{
+    float:right;
+    font:18px/24px 'arial';
+    color:#939498;
+    margin-right:3px;
+}
+.closealertb{width:26px;height:26px;position:absolute;top:-39px;right:-26px;}
+
+/*修改密码页面样式*/
+.show .show_cha_pass{background:#fff;padding-left:33px;}
+.show_cha_pass b{color:#2196F3;line-height:48px;}
+.show_cha_pass li{margin:22px 0;font-size:12px;}
+.show_cha_pass li span{display:inline-block;width:66px;height:30px;line-height:30px;text-align: right;margin-right:18px;}
+.show_cha_pass li input{width:218px;height:28px;line-height:28px;padding:0 10px;border:1px solid #e9e9e9;}
+.show_cha_pass button{
+    background: #2196f3 none repeat scroll 0 0;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    width: 80px;
+    margin:16px 0 24px 84px;
+}
+
+

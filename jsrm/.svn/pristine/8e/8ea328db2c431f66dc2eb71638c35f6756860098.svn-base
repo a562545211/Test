@@ -1,0 +1,9 @@
+redis_ip=10.4.67.194
+redis_port=6379
+redis_auth=jszy
+
+redis_ip1=10.4.67.194
+redis_port1=6380
+redis_auth1=jszy
+
+

@@ -1,0 +1,5 @@
+.wrap_table td span{
+    padding:5px 0;
+    display: block;
+    min-width: 120px;
+}

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>审核详情</title>
+    <script src="../../js/lib/jquery-1.12.1.js"></script>
+    <script src="../../js/public.js"></script>
+    <link rel="stylesheet" href="../../css/jquery.selectbox.css">
+    <script src="../../js/lib/jquery.selectbox.js"></script>
+    <script src="../../js/app/reset.js"></script>
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/edit.css">
+    <link rel="stylesheet" href="../../css/yulan.css">
+
+    <script src="../../js/myApp/baseURL.js"></script>
+    <script src="../../js/lib/urlParam.js"></script>
+    <script src="../../js/myApp/vetting/approveOpinion.js"></script>
+</head>
+<body>
+<div class="show_once show">
+    <div class="switch2">
+        <div class="edit-word">审批意见</div>
+    </div>
+    <div class="shenhe">
+        <div class="clear">
+            <span class="edit-word-long no_check">审核人</span><span id="appUser">王铁柱</span>
+            <span class="editright">审核结果(<span class="red">*</span>)<input type="radio" name="ispass" id="pass" value="pass"><label for="pass">通过</label><input type="radio" name="ispass" id="nopass" value="nopass"><label for="nopass">不通过</label>
+        </span>
+        </div>
+        <div class="clear" id="appDate"><span class="edit-word-long no_check">审核日期</span></div>
+        <dl>
+            <dt class='no_check'>审核意见栏</dt>
+            <dd class="textarea"><textarea name="" id="opinion"></textarea></dd>
+        </dl>
+        <div class='btmBrdr'>
+            <aside>
+                <button class="btn" id="btn">确定</button>
+                <button class="btn btn-grey" id="ret">返回</button>
+            </aside>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

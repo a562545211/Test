@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="statistics">
+
+    <select id="pendingSubmissionUpload" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+
+    select COUNT(*) from t_resource_info
+    <where>
+        resourceType != 'DRA'
+        AND createUserId = #{userId}
+        AND state = 1
+    </where>
+
+</select>
+    <select id="pendingApprovalUpload" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+
+        select COUNT(*) from t_resource_info
+        <where>
+            resourceType != 'DRA'
+            AND createUserId = #{userId}
+            AND state = 2
+        </where>
+
+    </select>
+    <select id="auditDoesNotPassUpload" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+
+        select COUNT(*) from t_resource_info
+        <where>
+            resourceType != 'DRA'
+            AND createUserId = #{userId}
+            AND state = 4
+        </where>
+
+    </select>
+
+    <select id="pendingSubmissionDraft" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+
+        select COUNT(*) from t_resource_info
+        <where>
+            resourceType = 'DRA'
+            AND createUserId = #{userId}
+            AND state = 1
+        </where>
+
+    </select>
+    <select id="pendingApprovalDraft" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+
+        SELECT
+            COUNT(*)
+        FROM
+            t_resource_info tri
+        LEFT JOIN t_approve_instance tai ON tai.busiId = tri.id
+        WHERE
+            tai.currentNode = 'reapp' AND tri.resourceType = 'DRA'
+            AND tri.createUserId = #{userId}
+        AND tri.state = 2
+
+    </select>
+    <select id="finalJudgmentDwraft" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+
+        SELECT
+        COUNT(*)
+        FROM
+        t_resource_info tri
+        LEFT JOIN t_approve_instance tai ON tai.busiId = tri.id
+        WHERE
+        tai.currentNode = 'final' AND tri.resourceType = 'DRA'
+        AND tri.createUserId = #{userId}
+        AND tri.state = 2
+
+    </select>
+
+    <select id="pendingBackDraft" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+
+        select COUNT(*) from t_resource_info
+        <where>
+            resourceType = 'DRA'
+            AND createUserId = #{userId}
+            AND state = 4
+        </where>
+
+    </select>
+
+
+    <select id="uploadpendingApprovalResource" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+
+        SELECT
+        COUNT(*)
+        FROM
+        t_approve_instance tai
+        LEFT JOIN t_resource_info tri ON tri.id = tai.busiId
+        WHERE
+        tri.resourceType != 'DRA'
+        AND tai.appUserId = #{userId}
+        AND tai.state = 1
+        AND tri.state = 2
+
+    </select>
+    <select id="dwraftPendingApprovalResource" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+
+        SELECT
+            COUNT(*)
+        FROM
+            t_approve_instance tai
+        LEFT JOIN t_resource_info tri ON tri.id = tai.busiId
+        WHERE
+            tri.resourceType = 'DRA'
+        AND tai.currentNode = 'reapp'
+        AND tai.appUserId = #{userId}
+        AND tai.state = 1
+       AND tri.state = 2
+
+    </select>
+    <select id="dwraftFinalJudgmentResource" resultType="java.lang.Integer" parameterType="java.util.HashMap">
+
+       SELECT
+            COUNT(*)
+       FROM
+            t_approve_instance tai
+       LEFT JOIN t_resource_info tri ON tri.id = tai.busiId
+       WHERE
+            tri.resourceType = 'DRA'
+       AND tai.currentNode = 'final'
+       AND tai.appUserId = #{userId}
+       AND tai.state = 1
+       AND tri.state = 2
+
+    </select>
+
+
+</mapper>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bookManage">
+
+    <select id="selectAllRes" resultType="com.jsrm.web.vo.ResourceInfoVo.ElectronVo" parameterType="java.util.HashMap" >
+
+        SELECT
+        *
+        FROM
+        t_resource_info tri
+        LEFT JOIN (
+        SELECT
+        t.busiId,
+        group_concat(
+        CASE
+        WHEN t.categDeep = 3 THEN
+        t.tCategoriesId
+        END
+        ) banben,
+        group_concat(
+        CASE
+        WHEN t.categDeep = 4 THEN
+        t.tCategoriesId
+        END
+        ) ceci,
+        group_concat(
+        CASE
+        WHEN t.categDeep = 3 THEN
+        tbcd.`name`
+        END
+        ) banname,
+        group_concat(
+        CASE
+        WHEN t.categDeep = 4 THEN
+        tbcd.`name`
+        END
+        ) cename
+        FROM
+        t_resouce_mid_categories t
+        LEFT JOIN t_base_categories_dict tbcd ON tbcd.`code` = t.tCategoriesId
+        GROUP BY
+        t.busiId
+        ) c ON c.busiId = tri.id
+        WHERE
+        tri.isElectron = '0'
+        AND tri.state = 3
+        AND tri.subjectId IN (
+        SELECT
+        tsmud.dataAuthorityId
+        FROM
+        t_sys_mid_user_dataauthority_rel tsmud
+        WHERE
+        tsmud.userId = #{userId}
+        AND tsmud.deep = 2
+        )
+        <if test=" resourceName != null and resourceName != '' ">
+        AND tri.resourceName LIKE '%${resourceName}%'
+        </if>
+        <if test=" subjectId != null and subjectId != '' ">
+        and tri.subjectId = #{subjectId}
+        </if>
+        <if test=" phaseId != null and phaseId != '' ">
+        AND tri.phaseId = #{phaseId}
+        </if>
+        <if test=" banben != null and banben != '' ">
+        AND c.banben = #{banben}
+        </if>
+        <if test=" ceci != null and ceci != '' ">
+        AND c.ceci =  #{ceci}
+        </if>
+
+    </select>
+
+    <update id="updateOutputState" parameterType="com.jsrm.web.vo.ResourceInfoVo.ElectronVo">
+        update t_resource_info set isOutput = #{state} where id = #{id}
+    </update>
+    <update id="updateOutputStateByIds"  parameterType="java.util.List">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            UPDATE t_resource_info
+            <set>
+                isOutput = 0
+            </set>
+            <where>
+                id =#{item.id}
+            </where>
+
+        </foreach>
+    </update>
+
+    <select id="getCategoryRelations" resultType="com.jsrm.model.catalog.Icategory" parameterType="map" statementType="STATEMENT">
+        SELECT * FROM t_base_categories_relation
+        <where>
+            <if test="empty neq iLevel">
+                AND ${iLevel} = '${iCode}'
+            </if>
+        </where>
+    </select>
+</mapper>

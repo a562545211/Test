@@ -1,0 +1,54 @@
+{
+	"status":0,
+	"message":"获取数据权限信息成功！",
+	"data":[
+		{
+			"deep": "1",
+			"deepCode": "phase",
+			"flag": "0",
+			"id": "120161117161126001069",
+			"name": "小学",
+			"parentId": "00"
+		},
+		{
+			"deep": "2",
+			"deepCode": "subject",
+			"flag": "0",
+			"id": "120161117161126002035",
+			"name": "语文",
+			"parentId": "120161117161126001069"
+		},
+		{
+			"deep": "1",
+			"deepCode": "phase",
+			"flag": "0",
+			"id": "120161117161126001068",
+			"name": "初中",
+			"parentId": "00"
+		},
+		{
+			"deep": "2",
+			"deepCode": "subject",
+			"flag": "0",
+			"id": "120161117161126002037",
+			"name": "语文",
+			"parentId": "120161117161126001068"
+		},
+		{
+			"deep": "1",
+			"deepCode": "phase",
+			"flag": "0",
+			"id": "120161117161126001066",
+			"name": "高中",
+			"parentId": "00"
+		},
+		{
+			"deep": "2",
+			"deepCode": "subject",
+			"flag": "0",
+			"id": "120161117161126002034",
+			"name": "语文",
+			"parentId": "120161117161126001066"
+		}
+	]
+}
