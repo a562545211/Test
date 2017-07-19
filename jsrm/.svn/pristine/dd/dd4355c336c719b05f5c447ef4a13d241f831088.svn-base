@@ -1,7 +1,0 @@
-#name{
-    width: 380px;
-}
-
-.selectbox_l dd{
-    margin: 0 5px;
-}
