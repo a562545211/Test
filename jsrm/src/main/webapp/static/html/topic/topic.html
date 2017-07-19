@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选题发稿</title>
+    <script src="../../js/lib/jquery-1.12.1.js"></script>
+    <script src="../../js/public.js"></script>
+    <script src="../../js/app/reset.js"></script>
+    <script src="../../../js/operate.js"></script>
+    <link rel="stylesheet" href="../../css/jquery.selectbox.css">
+    <link rel="stylesheet" href="../../css/jquery.datetimepicker.css">
+    <script src="../../js/lib/jquery.selectbox.js"></script>
+    <script src="../../js/lib/jquery.datetimepicker.js"></script>
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/edit.css">
+    <script src="../../js/app/resource_mo.js"></script>
+    <!--选题发稿javascript-->
+    <script src="../../js/myApp/baseURL.js"></script>
+    <script src="../../js/lib/urlParam.js"></script>
+    <script src="../../js/lib/pagination.js"></script>
+    <script src="../../js/myApp/topic/topic.js"></script>
+    <script>
+        $(function(){
+            var result = $.getOperateByType({
+                "itemId":itemid,
+                "type":['bar'],
+                "path":'/'
+            });
+            if(result&&result.bar){
+                for(var i=0;i<result.bar.length;i++){
+                    $("#export").append("<a href=\"javascript:void(0)\" onclick='"+result.bar[i].operatemethod+"()' class=\"upRht\">"+result.bar[i].operatetitle+"</a>");
+                }
+            }
+            //日历组件初始化代码
+            $("#dates_start1").datetimepicker({
+                value:$("#dates_start1").val(),
+                lang:'ch',
+                showSecond: false,
+                timepicker:false,
+                showMillisec: false,
+                format: 'Y-m-d'
+            });
+            $("#dates_end1").datetimepicker({
+                value:$("#dates_end1").val(),
+                lang:'ch',
+                showSecond: false,
+                timepicker:false,
+                showMillisec: false,
+                format: 'Y-m-d'
+            });
+            checkAll("resource");
+        });
+        function exportfg(obj){
+            window.location.href="setTopic.html?itemId="+itemid;
+        }
+    </script>
+</head>
+<body>
+<div class="show">
+    <div class="switch" id="export">
+        <div class="edit-word head">选题发稿</div>
+        <div class="edit-All">
+            <a data-value="" href="javascript:void(0)" class="selected" type="button">全部</a>
+            <a data-value="1" href="javascript:void(0)" type="button">待提交</a>
+            <a data-value="2" href="javascript:void(0)" type="button">待审核</a>
+            <a data-value="3" href="javascript:void(0)" type="button">已通过</a>
+            <a data-value="4" href="javascript:void(0)" type="button">已退回</a>
+        </div>
+        <!--<a href="setTopic.html" class="upRht"> 我要发稿</a>-->
+    </div>
+    <div class="showBg">
+        <dl>
+            <dt>上传时间</dt>
+            <dd class="wrap_date">
+                <input type="text" id="dates_start1" name="dates_start1" value="">
+                <span class="mr10">至</span>
+                <input type="text"  id="dates_end1" name="dates_end1" value="">
+            </dd>
+        </dl>
+        <dl class="edit2">
+            <dt class='text_r'>资源编号</dt>
+            <dd><input type="text" class="ipt"></dd>
+        </dl>
+        <dl class="edit2">
+            <dt class='text_r'>资源名称</dt>
+            <dd><input type="text" class="ipt"></dd>
+        </dl>
+        <dl class="edit2">
+            <dt class='text_r'>发稿人</dt>
+            <dd><input type="text" class="ipt"></dd>
+        </dl>
+        <div class="btnBrdr">
+            <aside>
+                <button class="btn btn-check">查询</button>
+                <button class="btn btn-grey">重置</button>
+            </aside>
+        </div>
+    </div>
+    <div class="wrap_table wrap_table_01" id="resource">
+        <div id="pic_no" class="default-prompt"><img src="../../images/default-pic.png"><br><span>暂无发稿  ！</span></div>
+        <table  cellpadding="0" cellspacing="0" class="table_01" id="table_data">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" class="all-check"></th>
+                    <th>资源编号</th>
+                    <th>资源名称</th>
+                    <th>发稿时间</th>
+                    <th>发稿人</th>
+                    <th>状态</th>
+                    <th>当前审核人</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <!--<tr>-->
+                <!--<td><input type="checkbox" class="item-check"></td>-->
+                <!--<td>Y00000001001</td>-->
+                <!--<td>XXX1.MOV</td>-->
+                <!--<td>2016-9-10</td>-->
+                <!--<td><span class="passed">已通过</span></td>-->
+                <!--<td>imouto</td>-->
+                <!--<td class="operate"><a href="checkTopic.html">查看</a> | <a href="#">导出</a></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td><input type="checkbox" class="item-check"></td>-->
+                <!--<td>Y00000001001</td>-->
+                <!--<td>XXX1.MOV</td>-->
+                <!--<td>2016-9-10</td>-->
+                <!--<td><span class="nopassed">已退回</span></td>-->
+                <!--<td>imouto</td>-->
+                <!--<td class="operate"><a href="checkTopic.html">查看</a> | <a href="editTopic.html">编辑</a></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td><input type="checkbox" class="item-check"></td>-->
+                <!--<td>Y00000001001</td>-->
+                <!--<td>XXX1.MOV</td>-->
+                <!--<td>2016-9-10</td>-->
+                <!--<td><span class="chck">待复审</span></td>-->
+                <!--<td>imouto</td>-->
+                <!--<td class="operate"><a href="checkTopic.html">查看</a> | <a href="editTopic.html">编辑</a></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td><input type="checkbox" class="item-check"></td>-->
+                <!--<td>Y00000001001</td>-->
+                <!--<td>XXX1.MOV</td>-->
+                <!--<td>2016-9-10</td>-->
+                <!--<td><span class="smt">待提交</span></td>-->
+                <!--<td>imouto</td>-->
+                <!--<td class="operate"><a href="checkTopic.html">查看</a> | <a href="#">导出</a></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td><input type="checkbox" class="item-check"></td>-->
+                <!--<td>Y00000001001</td>-->
+                <!--<td>XXX1.MOV</td>-->
+                <!--<td>2016-9-10</td>-->
+                <!--<td><span class="zhshen">待终审</span></td>-->
+                <!--<td>imouto</td>-->
+                <!--<td class="operate"><a href="checkTopic.html">查看</a></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td><input type="checkbox" class="item-check"></td>-->
+                <!--<td>Y00000001001</td>-->
+                <!--<td>XXX1.MOV</td>-->
+                <!--<td>2016-9-10</td>-->
+                <!--<td><span class="passed">已通过</span></td>-->
+                <!--<td>imouto</td>-->
+                <!--<td class="operate"><a href="checkTopic.html">查看</a> | <a href="#">导出</a></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td><input type="checkbox" class="item-check"></td>-->
+                <!--<td>Y00000001001</td>-->
+                <!--<td>XXX1.MOV</td>-->
+                <!--<td>2016-9-10</td>-->
+                <!--<td><span class="passed">已通过</span></td>-->
+                <!--<td>imouto</td>-->
+                <!--<td class="operate"><a href="checkTopic.html">查看</a> | <a href="#">导出</a></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+                <!--<td><input type="checkbox" class="item-check"></td>-->
+                <!--<td>Y00000001001</td>-->
+                <!--<td>XXX1.MOV</td>-->
+                <!--<td>2016-9-10</td>-->
+                <!--<td><span class="passed">已通过</span></td>-->
+                <!--<td>imouto</td>-->
+                <!--<td class="operate"><a href="checkTopic.html">查看</a> | <a href="#">导出</a></td>-->
+            <!--</tr>-->
+        </table>
+        <div class="delBrdr">
+            <div class="btn" id="btn_remove">导出</div>
+             <div class="page" id="page">
+                 <div class="pageLft">
+                     <!--<a class="noprev"></a>-->
+                     <a href="#" class="prev"></a>
+                     <a href="#">1</a>
+                     <a href="#">2</a>
+                     <a href="#">3</a>
+                     <a href="#">4</a>
+                     <a href="#">5</a>
+                     <span>...</span>
+                     <a href="#" class="next"></a>
+                     <!--<a class="nonext"></a>-->
+                 </div>
+                 <div class="pageRht">共<span id="totalPage">100</span>页，到第 <input type="text" id="toPage">页 <button onclick="searchPage();">确定</button></div>
+             </div>
+        </div>
+    </div>
+    <div id="download_frame" style="display: none;">
+        <!--<iframe id="download_frame" src=""></iframe>-->
+    </div>
+</div>
+</body>
+</html>

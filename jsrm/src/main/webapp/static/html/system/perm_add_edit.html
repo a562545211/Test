@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>权限管理 新增／编辑</title>
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/perm.css">
+    <script src="../../js/lib/jquery-1.12.1.js"></script>
+	<script src="../../js/myApp/baseURL.js"></script>
+    <script src="../../js/myApp/role/logic_role.js"></script>
+    <script src="../../js/lib/urlParam.js"></script>
+    <script src="../../js/myApp/system/permission.js"></script>
+    
+    <script type="text/javascript">
+    var id = $.getUrlParam("id");
+    var flag = $.getUrlParam("flag");
+
+    $(function(){ 
+		queryList();
+	});  
+    function queryList(){
+	    $.ajax({
+	    	type: "post",
+	    	url:"/roleManagerRest/queryTreeList",
+	    	async:false,
+	    	data:{},
+	    	dataType:"json",
+	    	success:function(data,status) {	
+	    		if(status=="success") {
+					var json = eval('(' + data.resultJson + ')'); 
+					var srt=$("#tree_show");
+					var content='';
+	    			for(var i=0;i<json.length;i++){
+	    				content+="<dl class=\"perm-item\">";
+						if(json[i].name == "个人中心") {
+							content += "<dt><input type=\"checkbox\" class=\"ifc\" name=\"item-" + json[i].id + "\" id=\"item-" + json[i].id + "\" checked='checked'style='display: none;' ><label  for=\"item-" + json[i].id + "\"><span style=\"font-size: 14px; color: #000;\">" + json[i].name + "</span></label></dt>";
+						}else{
+							content += "<dt><input type=\"checkbox\" class=\"ifc\" name=\"item-" + json[i].id + "\" id=\"item-" + json[i].id + "\"><label  for=\"item-" + json[i].id + "\"><span style=\"font-size: 14px; color: #000;\">" + json[i].name + "</span></label></dt>";
+						}
+						if(json[i].operateList.length>0){
+							for(var j=0;j<json[i].operateList.length;j++){
+								if(json[i].operateList[j].name == "默认选中"){
+									content+="<dd><input type=\"checkbox\" parentid=\"item-"+json[i].id+"\" class=\"ifc\" name=\"operate-"+json[i].operateList[j].id+"\" id=\"operate-"+json[i].operateList[j].id+"\"  checked='checked'style='display: none;'><label for=\"operate-"+json[i].operateList[j].id+"\" >"+json[i].operateList[j].name+"</label></dd>";
+								}else {
+									content += "<dd><input type=\"checkbox\" parentid=\"item-" + json[i].id + "\" class=\"ifc\" name=\"operate-" + json[i].operateList[j].id + "\" id=\"operate-" + json[i].operateList[j].id + "\"><label for=\"operate-" + json[i].operateList[j].id + "\" >" + json[i].operateList[j].name + "</label></dd>";
+								}
+							}
+							content+="</br>";
+						}
+	    				if(json[i].secList.length>0){
+							for(var k=0;k<json[i].secList.length;k++){
+								
+								content+="<dd>";
+								content+="<div class=\"col\">";
+	    						content+="<dl>";
+	    						content+="<dt>";
+	    						content+="<input type=\"checkbox\" parentid=\"item-"+json[i].id+"\" class=\"ifc\" name=\"item-"+json[i].secList[k].id+"\" id=\"item-"+json[i].secList[k].id+"\"><label for=\"item-"+json[i].secList[k].id+"\"><span style=\"font-size: 14px; color: #000;\">"+json[i].secList[k].name+"</span></label>";
+	    						content+="</dt>";
+								if(json[i].secList[k].operateList.length>0){
+									for(var l=0;l<json[i].secList[k].operateList.length;l++){
+										content+="<dd>";
+	    								content+="<input type=\"checkbox\" parentid=\"item-"+json[i].secList[k].id+"\" class=\"ifc\" name=\"operate-"+json[i].secList[k].operateList[l].id+"\" id=\"operate-"+json[i].secList[k].operateList[l].id+"\"><label for=\"operate-"+json[i].secList[k].operateList[l].id+"\">"+json[i].secList[k].operateList[l].name+"</label>";
+	    								content+="</dd>";
+									}
+								}
+								content+="</dl>";
+							    content+="</div>";
+							    content+="</dd>";
+							}
+						}
+						content+="</dl>";
+						srt.html(content);
+	    			}
+	    			if(flag=='update'||flag=='query'){
+	    				updateShow();
+	    			}
+	    			permission();
+	    		}	
+	    		
+	    	}
+	   	 });
+    }
+    function updateShow(){
+    	$.ajax({
+	    	type: "post",
+	    	url:"/roleManagerRest/queryRoleUpdate",
+	    	async:false,
+	    	data:{"id":id},
+	    	dataType:"json",
+	    	success:function(data,status) {	
+	    		if(status=="success") {
+	    			if(data.data){
+	    				$("#role-name").val(data.data.roleName);
+	    				$("#role-desc").val(data.data.des);
+						$("#role-code").val(data.data.roleCode);
+	    				$("#roleid").val(data.data.roleId);
+	    				for(var r=0;r<data.data.itemList.length;r++){
+	    				//	if(document.getElementById(data.data.itemList[r].id).checked){
+	    						document.getElementById(data.data.itemList[r].id).checked ="checked";
+	    					//}
+	    				}
+	    			}
+	    		}
+	    	}
+		});
+    }
+   var obj={}; 
+   var ilist = [];
+   var olist =[];
+   
+   function sbmit_1(){
+	   var url = getBasePath();
+	   if(flag == "update"){
+		   url +="roleManagerRest/updateRole";
+	   }else if(flag == "detail"){
+
+	   }else{
+		   url +="roleManagerRest/saveRole";
+	   }
+	   $('#tree_show').find(':checkbox').each(function(){
+		   if ($(this).is(":checked")) {
+				if($(this).attr("id").indexOf("-")==4){
+					ilist.push($(this).attr("id").substr($(this).attr("id").indexOf("-")+1,$(this).attr("id").length));
+				}else{
+					var omap ={};
+					omap.id = $(this).attr("id").substr($(this).attr("id").indexOf("-")+1,$(this).attr("id").length);
+					omap.itemid = $(this).attr("parentid").substr($(this).attr("parentid").indexOf("-")+1,$(this).attr("parentid").length);
+					olist.push(omap);	
+				}
+					
+		   }
+		});
+	   obj.ilist = ilist;
+	   obj.olist = olist;
+	   var parm =JSON.stringify(obj);
+	   $.ajax({
+		   type:"post",
+		   url:url,
+		   dataType:"json",
+		   data:{
+			   "json":parm,"roleName":$("#role-name").val(),"des":$("#role-desc").val(),"roleCode":$("#role-code").val(),"id":$("#roleid").val()
+		   },
+		   success:function (data) {
+			   if(data.result=="0"){
+				  window.location.href="authority.html?item2Id="+$.getUrlParam("item2Id")+"";
+					   alert("保存成功！");
+			   }else{
+				   alert("出错了！");
+				   console.log("第一个按钮获取信息失败！！");
+			   }
+		   },
+		   error:function () {
+			   alert("出错了！");
+			   console.log("第一个按钮获取信息失败！！！")
+		   }
+	   });
+   }
+
+	function back(){
+		window.history.back(-1);
+	}
+
+	</script>
+</head>
+<body>
+
+<div class="main" style="padding:0">
+    <!--nav-->
+   
+    <!--角色名称／描述-->
+    <div class="user_info clearfix">
+    <input type="hidden" id="roleid" name="roleid">
+        <div class="infogroup">
+            <label for="role-name">角色名称</label>
+            <input type="text" name="role-name" title="role-name" id="role-name">
+        </div>
+		<div class="infogroup">
+			<label for="role-desc" class="mr10">角色编码</label>
+			<input type="text" name="role-code" title="role-code" id="role-code">
+		</div>
+        <div class="infogroup last">
+            <label for="role-desc" class="mr10">角色描述</label>
+            <input type="text" name="role-desc" title="role-desc" id="role-desc">
+        </div>
+
+    </div>
+    <!--main_con-->
+    <div class="clearfix">
+        <h3 class="perm-title">权限设置</h3>
+        <div class="perm-list" id="tree_show">
+            <!--资源管理-->
+           
+        </div>
+
+        <div class="btn-group center">
+        <script type="text/javascript">
+	        if(flag!='query'){
+	        	document.write("<button class=\"btn-normal btn-enter\" type=\"button\" onclick=\"sbmit_1()\">确定</button>");
+	        }
+        </script>
+            <button class="btn-normal btn-cancel"  onclick="back()">返回</button>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

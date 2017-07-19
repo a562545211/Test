@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>资源转换状态列表</title>
+    <script src="../../js/lib/jquery-1.12.1.js"></script>
+    <script src="../../js/public.js"></script>
+    <script src="../../../js/operate.js"></script>
+    <link rel="stylesheet" href="../../css/jquery.selectbox.css">
+    <link rel="stylesheet" href="../../css/jquery.datetimepicker.css">
+    <script src="../../js/lib/jquery.selectbox.js"></script>
+    <script src="../../js/lib/jquery.datetimepicker.js"></script>
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/edit.css">
+    <script src="../../js/app/resource_mo.js"></script>
+    <script src="../../js/myApp/baseURL.js"></script>
+    <script src="../../js/lib/urlParam.js"></script>
+    <script src="../../js/lib/pagination.js"></script>
+    <script src="../../js/myApp/resource/resourceFileInfo.js"></script>
+</head>
+<body>
+    <div class="show">
+        <div>
+            <div class='selectB'>
+                <div class="selectbox">
+                    <div class="selectbox_value_box"><div class="selectbox_value">资源名称</div></div>
+                </div>
+            </div>
+            <input type="text" class="search" placeholder="请输入搜索的内容" id="resourceName">
+            <div class="btnBrdr">
+                <aside>
+                    <button class="btn btn-check">查询</button>
+                    <button class="btn btn-grey">重置</button>
+                    <button id="all" class="btn btn-check" onclick="transformAll();">全部转换</button>
+                </aside>
+            </div>
+            <div>注：状态为“转换中”，也有可能是未成功的。原因：转换服务器挂掉了导致的。如果长时间处于转换中，有几种情况：1.文件过大 2.服务器的问题。解决方式：请尝试重新转换</div>
+        </div>
+
+        <div class="wrap_table wrap_table_01">
+            <table cellpadding="0" cellspacing="0" class="table_01" id="table_data">
+                <thead>
+                <tr>
+                    <th>资源名称</th>
+                    <th>创建时间</th>
+                    <th>附件类型</th>
+                    <th>创建用户</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+            </table>
+            <div class="delBrdr">
+                <div class="page" id="page">
+                    <div class="pageLft">
+                        <a href="#" class="prev"></a>
+                        <a href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <span>...</span>
+                        <a href="#" class="next"></a>
+                    </div>
+                    <div class="pageRht">共<span id="totalPage">100</span>页，到第 <input type="text" id="toPage">页
+                        <button onclick="searchPage();">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

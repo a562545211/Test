@@ -1,0 +1,610 @@
+<!Doctype html>
+<html lang="en">
+<head>
+	<!--meta-->
+	<meta charset="UTF-8">
+	<!--title-->
+	<title>统计分析-资源统计-章节统计</title>
+	<!--link-->
+	<link rel="stylesheet" type="text/css" href="../../css/lh_reset.css">
+	<link rel="stylesheet" type="text/css" href="../../css/jquery.datetimepicker.css">
+	<link rel="stylesheet" type="text/css" href="../../css/jquery.selectbox.css">
+	<link rel="stylesheet" type="text/css" href="../../css/lh_statistics_analysis.css">
+	<!--script-->
+	<script type="text/javascript" src="../../js/myApp/newStatistics_classification/jquery-3.1.0.min.js"></script>
+	<script type="text/javascript" src="../../js/lib/jquery-1.12.1.js"></script>
+	<script src="../../js/public.js"></script>
+	<script type="text/javascript" src="../../js/lib/jquery.datetimepicker.js"></script>
+	<script type="text/javascript" src="../../js/lib/jquery.selectbox.js"></script>
+	<script type="text/javascript" src="../../js/myApp/baseURL.js"></script>
+	<script type="text/javascript" src="../../js/myApp/newStatistics_classification/getTime.js"></script>
+	<script type="text/javascript" src="../../js/myApp/newStatistics_classification/jquery.circliful.min.js"></script>
+	<script type="text/javascript" src="../../js/myApp/newStatistics_classification/statistics_analysis.js"></script>
+	<!--引入echarts-->
+	<script type="text/javascript" src="../../js/lib/echarts.js"></script>
+</head>
+<body>
+<!-- 中间内容 -->
+<div class="main">
+	<!-- 右侧 -->
+	<div class="main_right">
+		<div class="bar">
+			<div class="bar1">
+				<div class="chapter_statistics statistics btn_click">章节统计</div>
+				<div class="chapter_statistics statistics mar_l40"><a href="statistics_knowledge.html">知识点统计</a></div>
+				<div class="export_all btn">导出全部</div>
+			</div>
+			<!--<div class="bar1">-->
+				<!--&lt;!&ndash;<div class="resource_statistics statistics btn_click">资源统计</div>&ndash;&gt;-->
+				<!--&lt;!&ndash;<div class="resource_statistics statistics mar_l40"><a href="statistics_classification.html">工作量统计</a></div>&ndash;&gt;-->
+				<!--<div class="export_all btn">导出全部</div>-->
+			<!--</div>-->
+		</div>
+		<!--<div class="bar">-->
+			<!--<div class="bar1">-->
+				<!--<div class="chapter_statistics statistics btn_click">章节统计</div>-->
+				<!--<div class="chapter_statistics statistics mar_l40"><a href="statistics_knowledge.html">知识点统计</a></div>-->
+			<!--</div>-->
+		<!--</div>-->
+		<!-- 选择学段学科 -->
+		<div class="bar">
+			<div class="bar1 bar_border">
+				<!-- 学段选择 -->
+				<div class="choose_phase">
+					<p class="p1">学段选择</p>
+					<!-- 学段选择下拉框 -->
+					<dl class="phase_box mar_l40" id="pBox">
+						<dd>
+							<div class="selectbox selebar selectbox_width126" id="phasesubject1">
+								<input name="" value="" type="hidden">
+								<div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span>
+								</div>
+								<div class="selectbox_value_box"><div class="selectbox_value">请选择</div></div>
+								<div class="selectbox_list selectbox_width126">
+									<div class="selectbox_scroll_body">
+										<div class="selectbox_scroll"><div></div></div>
+									</div>
+									<ul class="selectbox_body" id="phaseBox">
+										<li data-value="0" class="selected" selected>全部</li>
+										<li data-value="0">小学</li>
+										<li data-value="0">初中</li>
+										<li data-value="0">高中</li>
+									</ul>
+								</div>
+							</div>
+						</dd>
+					</dl>
+				</div>
+				<!-- 学科选择 -->
+				<div class="choose_phase">
+					<p class="p1">学科选择</p>
+
+					<!-- 学科选择下拉框 -->
+					<dl class="phase_box mar_l40">
+						<dd>
+							<div class="selectbox selebar selectbox_width126" id="phasesubject2">
+								<input name="" value="" type="hidden">
+								<div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+								<div class="selectbox_value_box"><div class="selectbox_value">请选择</div></div>
+								<div class="selectbox_list selectbox_width126">
+									<div class="selectbox_scroll_body">
+										<div class="selectbox_scroll"><div></div></div>
+									</div>
+									<ul class="selectbox_body" id="subjectBox">
+										<li data-value="0" selected>全部</li>
+										<li data-value="0">语文</li>
+										<li data-value="0">数学</li>
+										<li data-value="0">英语</li>
+										<li data-value="0">思想品德</li>
+										<li data-value="0">体育</li>
+										<li data-value="0">美术</li>
+										<li data-value="0">音乐</li>
+										<li data-value="0">历史</li>
+									</ul>
+								</div>
+							</div>
+						</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+		<!-- 选择版本 -->
+		<div class="bar version hidden">
+			<div class="bar1 bar_border">
+				<p class="p1 p1_special">版&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本</p>
+				<ul>
+				</ul>
+			</div>
+		</div>
+		<!-- 选择册次 -->
+		<div class="bar volume hidden">
+			<div class="bar_border bar_special">
+				<p class="p1 p1_special">册&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;次</p>
+				<div class="empty mar_l40">
+					<ul class="grade_items">
+					</ul>
+				</div>
+				<div class="jiantou more hidden">
+					<p class="more">更多</p>
+					<!--<div class="jian_b"></div>-->
+				</div>
+			</div>
+		</div>
+		<!-- 时间筛选 -->
+		<div class="bar">
+			<div class="bar1">
+				<!-- 时间筛选 -->
+				<p class="p1">时间筛选</p>
+				<div class="time_common mar_l40" data-date="one">近一个月</div>
+				<div class="time_common mar_l40" data-date="three">近三个月</div>
+				<div class="time_common mar_l40" data-date="six">近半年</div>
+				<div class="date_wrap clearfix">
+					<span class="choose_self">自选时间</span>
+					<input type="text" id="dates_start1" name="dates_start1" value="">
+					<span class="mr10">至</span>
+					<input type="text"  id="dates_end1" name="dates_end1" value="">
+				</div>
+				<div class="statistics_btn btn btn3">统计</div>
+			</div>
+		</div>
+		<!-- 资源统计 -->
+		<div class="bar bar_margin">
+			<div class="bar1 bar_border">
+				<p class="p1">资源统计</p>
+				<div class="type type_form btn_click mar_l40">类型</div>
+				<div class="form type_form">格式</div>
+				<div class="export export_all btn btn3">导出</div>
+			</div>
+		</div>
+		<!-- 资源总量 -->
+		<div class="bar">
+			<div class="bar1">
+				<p class="p2">资源总量:</p>
+				<div class="p1_num resourceTotal"></div>
+				<p class="p2 p_padding hidden p_tips">当前条件下暂无数据！</p>
+			</div>
+		</div>
+		<div class="wrap position">
+			<div class="switch1 tab_switch">
+				<!-- 柱状图 -->
+				<div class="chart_wrap">
+					<div id="chart">
+						<!-- 这里是柱状图 -->
+					</div>
+				</div>
+				<!--饼图-->
+				<div class="pie hidden">
+					<p>资源比例分配</p>
+					<div class="pie_wrap">
+						<div id="pie1">
+
+						</div>
+						<div id="pie2">
+
+						</div>
+						<div id="pie3">
+
+						</div>
+						<div id="pie4">
+
+						</div>
+					</div>
+					<div class="legend_wrap">
+						<div class="legend">
+							<div class="legend_top">
+								<div class="square c1 o1"></div>
+								<p class="m">
+									<span class="pSource">小学</span>
+									<span class="sSource">数学</span>
+									<!--<span>北师大版</span>-->
+									<span class="vSource">一年级上册</span>
+								</p>
+							</div>
+							<div class="legend_bottom">
+								<div class="square c1 o2"></div>
+								<p class="n">
+									<span class="pSource">小学</span>
+									<span>资源</span>
+								</p>
+							</div>
+						</div>
+						<div class="legend">
+							<div class="legend_top">
+								<div class="square c2 o1"></div>
+								<p class="m">
+									<span class="pSource">小学</span>
+									<span class="sSource">数学</span>
+									<!--<span>北师大版</span>-->
+									<span class="vSource">一年级上册</span>
+								</p>
+							</div>
+							<div class="legend_bottom">
+								<div class="square c2 o2"></div>
+								<p>所有资源</p>
+							</div>
+						</div>
+
+						<div class="legend">
+							<div class="legend_top">
+								<div class="square c3 o1"></div>
+								<p>
+									<span class="pSource">小学</span>
+									<span class="sSource">数学</span>
+									<!--<span>北师大版</span>-->
+									<span class="vSource">一年级上册</span>
+									<span class="tSource">课件</span>
+								</p>
+							</div>
+							<div class="legend_bottom">
+								<div class="square c3 o2"></div>
+								<p class="n">
+									<span class="pSource">小学</span>
+									<span>资源</span>
+								</p>
+							</div>
+						</div>
+
+						<div class="legend">
+							<div class="legend_top">
+								<div class="square c4 o1"></div>
+								<p>
+									<span class="pSource">小学</span>
+									<span class="sSource">数学</span>
+									<!--<span>北师大版</span>-->
+									<span class="vSource">一年级上册</span>
+									<span class="tSource">课件</span>
+								</p>
+							</div>
+							<div class="legend_bottom">
+								<div class="square c4 o2"></div>
+								<p class="s">
+									<span class="pSource">小学</span>
+									<span class="sSource">数学</span>
+									<span>资源</span>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="wrap_table wrap_table_01 wrap_table_0001">
+					<table  cellpadding="0" cellspacing="0" class="table_01" id="table_data">
+						<div class="barTable">
+						<div class="table_wrap barTableOne clearfix">
+							<table id="resourceTab" cellpadding="0" cellspacing="0">
+						<tr>
+						<th>编号</th>
+						<th>一级资源分类</th>
+						<th>二级资源分类</th>
+						<th>数量</th>
+						<th>小计</th>
+						</tr>
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">01</td>-->
+						<!--<td>电子课本</td>-->
+						<!--<td class="secondType">电子课本</td>-->
+						<!--<td>1</td>-->
+						<!--<td>1</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td rowspan="2" class="table_number">02</td>-->
+						<!--<td rowspan="2">教师用书</td>-->
+						<!--<td class="secondType">教师用书1</td>-->
+						<!--<td>2</td>-->
+						<!--<td rowspan="2">4</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td rowspan="2" class="table_number" style="display: none">02</td>-->
+						<!--<td class="secondType">教师用书2</td>-->
+						<!--<td>2</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">03</td>-->
+						<!--<td>课表及解读</td>-->
+						<!--<td class="secondType">课表及解读</td>-->
+						<!--<td>3</td>-->
+						<!--<td>3</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr omit">-->
+						<!--<td>......</td>-->
+						<!--<td>......</td>-->
+						<!--<td class="secondType">......</td>-->
+						<!--<td>......</td>-->
+						<!--<td>......</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">04</td>-->
+						<!--<td>教学设计</td>-->
+						<!--<td class="secondType">教学设计</td>-->
+						<!--<td>4</td>-->
+						<!--<td>4</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">05</td>-->
+						<!--<td>学案</td>-->
+						<!--<td class="secondType">学案</td>-->
+						<!--<td>5</td>-->
+						<!--<td>5</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">06</td>-->
+						<!--<td>课件</td>-->
+						<!--<td class="secondType">课件</td>-->
+						<!--<td>6</td>-->
+						<!--<td>6</td>-->
+						<!--</tr>-->
+						<!--<tr>-->
+						<!--<td class="table_number">07</td>-->
+						<!--<td>同步练习</td>-->
+						<!--<td class="secondType">同步练习</td>-->
+						<!--<td>7</td>-->
+						<!--<td>7</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">08</td>-->
+						<!--<td>素材</td>-->
+						<!--<td class="secondType">素材</td>-->
+						<!--<td>8</td>-->
+						<!--<td>8</td>-->
+						<!--</tr>-->
+						<!--<tr>-->
+						<!--<td class="table_number">09</td>-->
+						<!--<td>微课</td>-->
+						<!--<td class="secondType">微课</td>-->
+						<!--<td>9</td>-->
+						<!--<td>9</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">10</td>-->
+						<!--<td>教学视频</td>-->
+						<!--<td class="secondType">教学视频</td>-->
+						<!--<td>10</td>-->
+						<!--<td>10</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">11</td>-->
+						<!--<td>拓展资源</td>-->
+						<!--<td class="secondType">拓展资源</td>-->
+						<!--<td>11</td>-->
+						<!--<td>11</td>-->
+						<!--</tr>-->
+						<!--<tr>-->
+						<!--<td class="table_number">12</td>-->
+						<!--<td>教学指导与研究</td>-->
+						<!--<td class="secondType">教学指导与研究</td>-->
+						<!--<td>12</td>-->
+						<!--<td>12</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">13</td>-->
+						<!--<td>实验</td>-->
+						<!--<td class="secondType">实验</td>-->
+						<!--<td>13</td>-->
+						<!--<td>13</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">14</td>-->
+						<!--<td>中考</td>-->
+						<!--<td class="secondType">中考</td>-->
+						<!--<td>14</td>-->
+						<!--<td>14</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">15</td>-->
+						<!--<td>高考</td>-->
+						<!--<td class="secondType">高考</td>-->
+						<!--<td>15</td>-->
+						<!--<td>15</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">16</td>-->
+						<!--<td>小学竞赛</td>-->
+						<!--<td class="secondType">小学竞赛</td>-->
+						<!--<td>16</td>-->
+						<!--<td>16</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">17</td>-->
+						<!--<td>初中竞赛</td>-->
+						<!--<td class="secondType">初中竞赛</td>-->
+						<!--<td>17</td>-->
+						<!--<td>17</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">18</td>-->
+						<!--<td>高中竞赛</td>-->
+						<!--<td class="secondType">高中竞赛</td>-->
+						<!--<td>18</td>-->
+						<!--<td>18</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">19</td>-->
+						<!--<td>知识讲解</td>-->
+						<!--<td class="secondType">知识讲解</td>-->
+						<!--<td>19</td>-->
+						<!--<td>19</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">20</td>-->
+						<!--<td>学习视频</td>-->
+						<!--<td class="secondType">学习视频</td>-->
+						<!--<td>20</td>-->
+						<!--<td>20</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">21</td>-->
+						<!--<td>课文全解</td>-->
+						<!--<td class="secondType">课文全解</td>-->
+						<!--<td>21</td>-->
+						<!--<td>21</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">22</td>-->
+						<!--<td>时政要点</td>-->
+						<!--<td class="secondType">时政要点</td>-->
+						<!--<td>22</td>-->
+						<!--<td>22</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">23</td>-->
+						<!--<td>实践教育</td>-->
+						<!--<td class="secondType">实践教育</td>-->
+						<!--<td>23</td>-->
+						<!--<td>23</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">24</td>-->
+						<!--<td>名词解释</td>-->
+						<!--<td class="secondType">名词解释</td>-->
+						<!--<td>24</td>-->
+						<!--<td>24</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<!--<td class="table_number">25</td>-->
+						<!--<td colspan="2">总计</td>-->
+						<!--<td>25</td>-->
+						<!--<td>25</td>-->
+						<!--</tr>-->
+						<!--<tr class="tableTr">-->
+						<td class="l_td table_td not" colspan="5">展开全部</td>
+						</tr>
+						</table>
+						</div>
+						<div class="table_wrap barTableTwo clearfix">
+						</div>
+						</div>
+
+					</table>
+				</div>
+			</div>
+			<!-- 切换时用 -->
+			<div class="switch2 tab_switch">
+				<div class="switch2_wrap">
+					<!-- 柱状图 -->
+					<div class="chart_wrap2">
+						<div id="chart2">
+							<!-- 这里是柱状图 -->
+						</div>
+					</div>
+					<!-- 表格 -->
+					<div class="table_wrap2">
+						<table cellpadding="0" cellspacing="0">
+							<thead>
+							<tr>
+								<th>编号</th>
+								<th>格式</th>
+								<th>数量</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td>01</td>
+								<td>图片</td>
+								<td class="t_image">0</td>
+							</tr>
+							<tr>
+								<td>02</td>
+								<td>文档</td>
+								<td class="t_doc">0</td>
+							</tr>
+							<tr>
+								<td>03</td>
+								<td>视频</td>
+								<td class="t_video">0</td>
+							</tr>
+							<tr>
+								<td>04</td>
+								<td>音频</td>
+								<td class="t_audio">0</td>
+							</tr>
+							<tr>
+								<td>05</td>
+								<td>动画</td>
+								<td class="t_flash">0</td>
+							</tr>
+							<tr>
+								<td>总计</td>
+								<td></td>
+								<td class="t_total">0</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="footer_left f_common">
+				<div class="left_bar1">
+					<div class="word">
+						<span>发稿统计:</span>
+						<div class="word_total topicNum"></div>
+					</div>
+					<div class="btn1">导出</div>
+				</div>
+				<div class="left_bar2">
+					<div class="green green_one">
+						<div class="green_num topicWord"></div>
+						<div class="green_word">发稿字数(字)</div>
+					</div>
+					<div class="green green_two">
+						<div class="green_num topicTime"></div>
+						<div class="green_word">音视频时长（秒）</div>
+					</div>
+					<div class="green green_three">
+						<div class="green_num topicSize"></div>
+						<div class="green_word">资源大小(MB)</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer_right f_common">
+				<div class="left_bar1">
+					<div class="word">
+						<span>审核总量:</span>
+						<div class="word_total vettedNumber"></div>
+
+					</div>
+					<div class="btn1">导出</div>
+
+				</div>
+				<div class="right_bar2">
+					<div class="right_top">
+
+						<div class="word word_vetted">
+							<span>发稿审核:</span>
+							<div class="word_total topicvetted"></div>
+						</div>
+						<div class="word change">
+							<span>上传审核:</span>
+							<div class="word_total uploadvetted"></div>
+						</div>
+					</div>
+					<div class="right_bottom">
+						<div class="green green_four">
+							<div class="green_num topicrechecked"></div>
+							<div class="green_word">发稿复审</div>
+							<!--<div class="sub_word sub_word_one hidden">-->
+								<!--<p>发稿字数(千字)：<span class="checkedword"></span></p>-->
+								<!--<p>音视频时长(分)：<span class="checkedtime"></span></p>-->
+								<!--<p>资源大小(MB)：<span class="checkedsiza"></span></p>-->
+							<!--</div>-->
+						</div>
+						<div class="green green_five">
+							<div class="green_num topicfinal"></div>
+							<div class="green_word">发稿终审</div>
+							<!--<div class="sub_word sub_word_two hidden">-->
+								<!--<p>发稿字数(千字)：<span class="finalword"></span></p>-->
+								<!--<p>音视频时长(分)：<span class="finaltime"></span></p>-->
+								<!--<p>资源大小(MB)：<span class="finalsiza"></span></p>-->
+							<!--</div>-->
+						</div>
+						<div class="green">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

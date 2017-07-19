@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编目管理</title>
+    <script src="../../js/lib/jquery-1.12.1.js"></script>
+    <script src="../../js/app/reset.js"></script>
+    <link rel="stylesheet" href="../../css/jquery.selectbox.css">
+    <link rel="stylesheet" href="../../css/jquery.datetimepicker.css">
+    <script src="../../js/lib/jquery.selectbox.js"></script>
+    <script src="../../js/lib/jquery.datetimepicker.js"></script>
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/edit.css">
+    <script src="../../js/app/resource_mo.js"></script>
+    <script>
+        $(function(){
+            //日历组件初始化代码
+            $("#dates_start1").datetimepicker({
+                value:$("#dates_start1").val(),
+                lang:'ch',
+                showSecond: false,
+                timepicker:false,
+                showMillisec: false,
+                format: 'Y-m-d'
+            });
+            $("#dates_end1").datetimepicker({
+                value:$("#dates_end1").val(),
+                lang:'ch',
+                showSecond: false,
+                timepicker:false,
+                showMillisec: false,
+                format: 'Y-m-d'
+            });
+            checkAll("resource");
+        })
+    </script>
+</head>
+<body>
+<div class="show">
+    <div class="switch">
+        <div class="edit-word head">编目管理</div>
+        <a href="catalog.html" class="selected">编目管理</a>
+        <a href="catalog_management.html">目录管理</a>
+        <a href="knowledge_management.html">知识点管理</a>
+        <a href="shines_management.html">映射管理</a>
+    </div>
+    <div>
+        <div>
+            <div class='selectB'>
+                <div class="selectbox selectbox_width126">
+                    <input name="" value="" type="hidden">
+                    <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                    <div class="selectbox_value_box"><div class="selectbox_value">资源编号</div></div>
+                    <div class="selectbox_list selectbox_width126">
+                        <div class="selectbox_scroll_body">
+                            <div class="selectbox_scroll"><div></div></div>
+                        </div>
+                        <ul class="selectbox_body">
+                            <li data-value="0">资源编号</li>
+                            <li data-value="0">音频</li>
+                            <li data-value="0">视频</li>
+                            <li data-value="0">动画</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="text" class="search">
+        <button class="btn">搜索</button>
+    </div>
+    <div class="fl0">
+        <dl>
+            <dt>上传时间</dt>
+            <dd class="wrap_date">
+                <input type="text" id="dates_start1" name="dates_start1" value="2014-10-18">
+                <span class="mr10">至</span>
+                <input type="text"  id="dates_end1" name="dates_end1" value="2014-10-19">
+            </dd>
+        </dl>
+        <div class="btnBrdr">
+            <aside>
+                <button class="btn">查询</button>
+                <button class="btn btn-grey">返回</button>
+            </aside>
+        </div>
+    </div>
+    <div class="wrap_table wrap_table_01" id="resource">
+        <div class="delBrdr2">
+            <a href="#" class="btn">新增编号</a>
+        </div>
+        <table  cellpadding="0" cellspacing="0" class="table_01">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" class="all-check"></th>
+                    <th>选题编号</th>
+                    <th>资源名称</th>
+                    <th>责任编辑</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tr>
+                <td><input type="checkbox" class="item-check"></td>
+                <td>00000001</td>
+                <td>a</td>
+                <td>-</td>
+                <td>2016/09/29</td>
+                <td class="operate"><a href="catalogView.html">查看</a> <a href="catalogEdit.html">编辑</a></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" class="item-check"></td>
+                <td>00000001</td>
+                <td>a</td>
+                <td>-</td>
+                <td>2016/09/29</td>
+                <td class="operate"><a href="catalogView.html">查看</a> <a href="catalogEdit.html">编辑</a></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" class="item-check"></td>
+                <td>00000001</td>
+                <td>a</td>
+                <td>-</td>
+                <td>2016/09/29</td>
+                <td class="operate"><a href="catalogView.html">查看</a> <a href="catalogEdit.html">编辑</a></td>
+            </tr>
+        </table>
+        <div class="delBrdr">
+            <div class="page">
+                <div class="pageLft">
+                    <!--<a class="noprev"></a>-->
+                    <a href="#" class="prev"></a>
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <span>...</span>
+                    <a href="#" class="next"></a>
+                    <!--<a class="nonext"></a>-->
+                </div>
+                <div class="pageRht">共100页，到第 <input type="text">页 <button>确定</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

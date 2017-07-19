@@ -1,0 +1,12 @@
+{
+	"status": 0,
+	"message": "查询成功",
+	"data": [
+		{
+			"topicNumber": 5,
+			"topicsize": 146840,
+			"topictime": 125,
+			"topicword": 125
+		}
+	]
+}

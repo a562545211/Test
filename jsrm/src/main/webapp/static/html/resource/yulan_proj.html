@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>预览工程文件</title>
+    <script src="../../js/lib/jquery-1.12.1.js"></script>
+    <script src="../../js/public.js"></script>
+    <script src="../../js/myApp/baseURL.js"></script>
+    <script src="../../js/app/reset.js"></script>
+    <script src="../../js/app/yulan.js"></script>
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/edit.css">
+    <link rel="stylesheet" href="../../css/yulan.css">
+    <script src="../../js/lib/urlParam.js"></script>
+    <script src="../../js/myApp/baseURL.js"></script>
+    <script src="../../js/myApp/examinePage.js"></script>
+
+    <script type="text/javascript" src="../../preview/flexpaper/flexpaper_flash.js"></script>
+    <script type="text/javascript" src="../../preview/flexpaper/swfobject.js"></script>
+    <script type="text/javascript" src="../../preview/flowplayer/flowplayer-3.2.11.min.js"></script>
+    <script type="text/javascript" src="../../preview/preview.js"></script>
+
+    <script src="../../js/myApp/common.js"></script>
+    <script src="../../js/myApp/resource/yulan.js"></script>
+    <!--<script src="../../js/myApp/resource/yulan_proj.js"></script>-->
+    <!--<script src="../../js/myApp/preview.js"></script>-->
+</head>
+<body>
+<div id="show" class="show_once show">
+    <div class="topic clearfix">
+        <span class="title_text">资源名称：</span>
+        <input type="text" class="search bor" id="resource_name" readonly>
+        <a class="btn fl" href="javascript:void(0);" id="download_btn">下载</a>
+        <a class="btn fr bg_green" id="btnfh">返回</a>
+    </div>
+    <div class="audio_left yuheight">
+        <div class="" id="preview">
+
+        </div>
+    </div>
+    <div class="audio_right">
+        <ul class="infoList pd10">
+            <li>
+                <span>上传者:</span>
+                <span></span>
+            </li>
+            <li>
+                <span>上传时间:</span>
+                <span></span>
+            </li>
+            <li>
+                <span>ID号:</span>
+                <span></span>
+            </li>
+        </ul>
+        <div class="pd10 wrapInput" style="height:724px;">
+            <div class="edit-word clear">资源信息</div>
+            <dl>
+                <dt>所属学科:</dt>
+                <dd>
+                    <input type="text" name="" value="" class="subject">
+                </dd>
+            </dl>
+            <dl>
+                <dt>资源类型:</dt>
+                <dd>
+                    <input type="text" name="" value="" class="resourceType">
+                </dd>
+            </dl>
+            <dl>
+                <dt>资源属性:</dt>
+                <dd class="resource_input">
+                    <input type="text" id="show1" name="" value="学段">
+
+                    <input type="text" id="show2" name="" value="学科">
+
+                    <input type="text" id="show3" name="" value="版本">
+
+                    <input type="text" id="show4" name="" value="册次">
+
+                    <input type="text" id="show5" name="" value="章">
+
+                    <input type="text" id="show6" name="" value="节">
+
+                    <input type="text" id="show7" name="" value="目">
+
+                    <input type="text" id="show8" name="" value="课时">
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>资源描述:</dt>
+                <dd><textarea id="resourceDes" name="" class="resourceDes"></textarea></dd>
+            </dl>
+            <!--<dl>-->
+                <!--<dt>关联原始文件:</dt>-->
+                <!--<dd><textarea id="original" name="" class="resourceDes"></textarea></dd>-->
+            <!--</dl>-->
+        </div>
+    </div>
+    <!--<div style="margin-top: 18px;">-->
+    <div style="margin-top: 0;padding:0;">
+        <iframe id="approveHistory" name="approveHistory" src="" frameborder="no" scrolling="no" width="100%" height="100%"></iframe>
+    </div>
+    <div style="display: none;">
+        <iframe id="download" src=""></iframe>
+    </div>
+</div>
+</body>
+</html>

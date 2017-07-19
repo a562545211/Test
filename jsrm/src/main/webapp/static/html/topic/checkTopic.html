@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发稿查看</title>
+    <script src="../../js/lib/jquery-1.12.1.js"></script>
+    <script src="../../js/public.js"></script>
+    <link rel="stylesheet" href="../../css/jquery.selectbox.css">
+    <script src="../../js/lib/jquery.selectbox.js"></script>
+    <script src="../../js/app/reset.js"></script>
+    <script src="../../js/lib/urlParam.js"></script>
+    <script src="../../js/app/checkTopic.js"></script>
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/edit.css">
+    <link rel="stylesheet" href="../../css/footer_part.css">
+    <!--发稿查询js-->
+    <script src="../../js/myApp/baseURL.js"></script>
+    <!--<script src="../../js/myApp/knowledgesAttribute.js"></script>-->
+    <!--<script src="../../js/lib/icategories.js"></script>-->
+    <script src="../../js/myApp/examinePage.js"></script>
+    <script src="../../js/myApp/topic/checkTopic.js"></script>
+    <script>
+        $(function () {
+            checkAll("resource");
+            layer('.btn_xz_alert','.btn_xz_alertb');
+        })
+    </script>
+</head>
+<body>
+<div id="show" class="show_once show">
+    <div class="switch">
+        <div class="edit-word head">查看</div>
+    </div>
+
+    <div>
+        <dl class='textarea_1'>
+            <dt class='no_check'>选题编号</dt>
+            <dd><div class="edit-num"><span class="check_show"></span></div>
+        </dl>
+        <dl class='textarea_1'>
+            <dt class='no_check'>资源名称</dt>
+            <dd>
+                <input type="text" class="iptFl" value="" style="width: 607px">
+                <!--<span class="tips">资源名称根据选题编号对应的资源名称带过来，可修改</span>-->
+            </dd>
+        </dl>
+        <div>
+            <dl class="edit-banc">
+                <dt class='no_check'>发稿类型<span class="star">*</span></dt>
+                <dd>
+                    <input type="text" name="" value="选择" id="selectbox0" class="selectboxDiv">
+                </dd>
+            </dl>
+            <dl class="edit-banc">
+                <dt class='text_r'>版次<span class="star">*</span></dt>
+                <dd><input type="text" class="ipt" value=""><span>版</span></dd>
+            </dl>
+            <dl class="edit-banc">
+                <dt class="text_r">ISBN</dt>
+                <dd><input type="text" value="" class="ISBN"></dd>
+            </dl>
+        </div>
+        <div class="clear"><span class="edit-word-long no_check">责任编辑</span><span class="chargeEditor"></span></div>
+    </div>
+    <div>
+        <dl>
+            <dt><input type="checkbox"  name="items" class="item-check" id="rescss"><label for="rescss">资源属性</label><span class="star">*</span></dt>
+            <dd class="dd_rseource">
+                <div class="selectbox_x">
+                    <input type="text" name="" value="学段" id="selectbox1" class="selectboxDiv">
+                    <input type="text" name="" value="学科" id="selectbox2" class="selectboxDiv">
+                    <input type="text" name="" value="版本" id="selectbox3" class="selectboxDiv">
+                    <input type="text" name="" value="册次" id="selectbox4" class="selectboxDiv">
+                </div>
+                <div class="wrap_select w_100" id="selectbox5678">
+                    <!--<input type="text" name="" value="章" id="selectbox5" class="selectboxDiv">-->
+                    <!--<input type="text" name="" value="节" id="selectbox6" class="selectboxDiv">-->
+                    <!--<input type="text" name="" value="目" id="selectbox7" class="selectboxDiv">-->
+                    <!--<input type="text" name="" value="课时" id="selectbox8" class="selectboxDiv">-->
+                </div>
+            </dd>
+            <!--<dd id="addKnowledage" style="margin-left: 140px">-->
+
+            <!--</dd>-->
+        </dl>
+        <dl>
+            <dt><input type="checkbox"  name="items" class="item-check" id=""><label for="">知识点</label><span class="star">*</span></dt>
+            <dd id="addKnowledage"></dd>
+        </dl>
+    </div>
+    <div>
+        <div class="clear">
+            <dl>
+                <dt><input type="checkbox"  name="items" class="item-check" id="restype"><label for="restype">资源类别</label><span class="star">*</span><span></span></dt>
+                <dd>
+                    <input type="text" name="" value="请选择" id="selectbox9" class="selectboxDiv">
+                </dd>
+                <dt><label>类别二级</label><span class="star"></span><span></span></dt>
+                <dd>
+                    <input type="text" name="" value="请选择" id="selectbox10" class="selectboxDiv">
+                </dd>
+            </dl>
+        </div>
+        <div class="clear">
+            <dl>
+                <dt><input type="checkbox"  name="items" class="item-check" id="resurl"><label for="resurl">资源格式</label><span class="star">*</span><span></span></dt>
+                <dd>
+                    <input type="text" name="" value="请选择" id="selectbox11" class="selectboxDiv">
+                </dd>
+            </dl>
+        </div>
+
+        <dl class="btm10">
+            <dt class='no_check'>资源描述<span class="star">*</span></dt>
+            <dd class="textarea"><textarea name=""></textarea></dd>
+        </dl>
+    </div>
+    <div class='clear'>
+        <dl>
+            <dt class='no_check'>资源制作者</dt>
+            <dd><input class='text_no text_btm resourceMaker' type="text" value=""></dd>
+        </dl>
+        <dl>
+            <dt class='no_check'>作者简介<span class="star">*</span></dt>
+            <dd class="textarea"><textarea name="" class="aboutAuthor"></textarea></dd>
+        </dl>
+    </div>
+    <div class="mtb_none">
+        <dl>
+            <dt class='no_check'>使用对象<span class="star">*</span></dt>
+            <dd class="once_2">
+                <input type="checkbox" id="teacher"><label for="teacher">老师</label>
+                <input type="checkbox" id="student"><label for="student">学生</label>
+            </dd>
+        </dl>
+        <dl class="mt10">
+            <dt class="no_check">资源来源<span class="star">*</span></dt>
+            <dd> <input class='text_btm resourceSources' type="text" class="text" value=""></dd>
+        </dl>
+        <div>
+            <dl>
+                <dt class='no_check'>版权<span class="star">*</span></dt>
+                <dd> <input class='text_btm copyright' type="text" class="text" value=""></dd>
+            </dl>
+            <dl>
+                <dt class="text_r">年份<span class="star">*</span></dt>
+                <dd> <input class='text_btm yearMonth' type="text" class="text" value=""></dd>
+            </dl>
+        </div>
+        <dl>
+            <dt><input type="checkbox" name="items" class="item-check" id="oneres"><label for="oneres">独家资源</label></dt>
+            <dd class="once_2">
+                <span class="edit-word-long2"><input type="radio" name="radio" id="yes"><label for="yes">是</label></span>
+                <input type="radio" name="radio" id="no"><label for="no">否</label>
+            </dd>
+        </dl>
+        <dl>
+            <dt><input type="checkbox" name="items" class="item-check" id="checkres"><label for="checkres">原创资源</label></dt>
+            <dd class="once_2">
+                <span class="edit-word-long2"><input type="radio" name="radio01" id="yes01"><label for="yes01">是</label></span>
+                <input type="radio" name="radio01" id="no01"><label for="no01">否</label>
+            </dd>
+        </dl>
+        <dl>
+            <dt><input type="checkbox" name="items" class="item-check" id="test"><label for="test">文种</label><span class="star">*</span></dt>
+            <dd class="once_2">
+                <input type="radio" name="test" id="china"><label for="china">中文</label>
+                <input type="radio" name="test" id="enish"><label for="enish">外文</label>
+            </dd>
+        </dl>
+        <dl>
+            <dt><input type="checkbox" name="items" class="item-check" id="resrank"><label for="resrank">资源等级</label><span class="star">*</span></dt>
+            <dd class="once_2">
+                <input type="radio" name="rank" id="nice"><label for="nice">精品</label>
+                <input type="radio" name="rank" id="common"><label for="common">普通</label>
+            </dd>
+        </dl>
+        <dl>
+            <dt><input type="checkbox" name="items" class="item-check" id="prcie"><label for="prcie">价格</label><span class="star">*</span></dt>
+            <dd class="once_2">
+                <input type="radio" name="free" id="free"><label for="free">免费</label>
+                <input type="radio" name="free" id="charge"><label for="charge">收费</label><input type="text" class="text dot" value="">点
+            </dd>
+
+        </dl>
+    </div>
+    <!--<div class="switch2">-->
+        <!--<div class="edit-word">审核状态</div>-->
+    <!--</div>-->
+    <!--<div class="shenhe">-->
+        <!--<div class="clear"><span class="edit-word-long no_check">初审人</span>王铁柱</div>-->
+        <!--<div class="clear"><span class="edit-word-long no_check">初审日期</span>2016-10-09</div>-->
+        <!--<div class="clear"><span class="edit-word-long no_check">审核状态</span>审核通过</div>-->
+        <!--<dl>-->
+            <!--<dt class='no_check'>初审意见栏</dt>-->
+            <!--<dd class="textarea"><textarea name="">234233252525</textarea></dd>-->
+        <!--</dl>-->
+    <!--</div>-->
+    <!--<div class="shenhe">-->
+        <!--<div class="clear"><span class="edit-word-long no_check">复审人</span>王铁柱</div>-->
+        <!--<div class="clear"><span class="edit-word-long no_check">复审日期</span>2016-10-09</div>-->
+        <!--<div class="clear"><span class="edit-word-long no_check">审核状态</span>审核通过</div>-->
+        <!--<dl>-->
+            <!--<dt class='no_check'>复审意见栏</dt>-->
+            <!--<dd class="textarea"><textarea name="">3535355</textarea></dd>-->
+        <!--</dl>-->
+    <!--</div>-->
+    <!--<div class="shenhe">-->
+        <!--<div class="clear"><span class="edit-word-long no_check">终审人</span>王铁柱</div>-->
+        <!--<div class="clear"><span class="edit-word-long no_check">终审日期</span>2016-10-09</div>-->
+        <!--<div class="clear"><span class="edit-word-long no_check">审核状态</span>审核通过</div>-->
+        <!--<dl>-->
+            <!--<dt class='no_check'>终审意见栏</dt>-->
+            <!--<dd class="textarea"><textarea name="">3535355</textarea></dd>-->
+        <!--</dl>-->
+    <!--</div>-->
+
+    <div style="padding:0">
+        <iframe id="approveHistory" name="approveHistory" src="" frameborder="no" scrolling="no" width="100%" height="100%"></iframe>
+    </div>
+
+    <div class='btmBrdr'>
+        <aside>
+            <!--<button class="btn btn-fg">发稿</button>-->
+            <button class="btn btn-grey" id="btn_fh">返回</button>
+        </aside>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发稿</title>
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/jquery.selectbox.css">
+    <link rel="stylesheet" href="../../css/edit.css">
+    <link rel="stylesheet" href="../../css/footer_part.css">
+    <link rel="stylesheet" href="../../css/alertbox.css">
+
+    <script src="../../js/lib/jquery-1.12.1.js"></script>
+    <script src="../../js/lib/urlParam.js"></script>
+    <script src="../../js/lib/jquery.selectbox.js"></script>
+    <script src="../../js/app/reset.js"></script>
+    <script src="../../js/myApp/baseURL.js"></script>
+
+    <!--我要发稿js-->
+    <script src="../../js/lib/icategories.init.js"></script>
+    <script src="../../js/lib/icategories.js"></script>
+    <script src="../../js/lib/iknowledges.init.js"></script>
+    <script src="../../js/myApp/topic/alertchecked.js"></script>
+    <script src="../../js/myApp/common.js"></script>
+    <script src="../../js/myApp/topic/setTopic.js"></script>
+    <script>
+        $(function () {
+            checkAll("show");
+            layer('.btn_xz_alert','#btn_xz_alertb');
+        })
+    </script>
+</head>
+<body>
+<div id="show" class="show_once show">
+    <div class="switch">
+        <div class="edit-word head">发稿</div>
+    </div>
+    <div>
+        <dl class='textarea_1'>
+            <dt class='no_check'>&nbsp;&nbsp;选题编号<span>*</span></dt>
+            <dd>
+                <div class="edit-num">
+                    <span class="check_show"></span>
+                </div>
+                <button class="btn_xz btn_xz_alert" id="chose-no">选择</button>
+            </dd>
+        </dl>
+        <dl class='textarea_1'>
+            <dt>
+                <input type="checkbox"  name="items" class="item-check" id="resname" checked="checked">
+                <label for="resname">资源名称</label>
+            </dt>
+            <dd>
+                <input type="text" class="iptFl" style="width: 605px;">
+                <p class="tips" style="font-size: 12px;margin-left: 0;">资源名称根据选题编号对应的资源名称带过来，可修改</p>
+            </dd>
+        </dl>
+        <div>
+            <dl class="edit-banc">
+                <dt>
+                    <input type="checkbox" name="items" class="item-check" id="draftTypeId" checked="checked">
+                    <label for="draftTypeId">发稿类型</label>
+                    <span>*</span>
+                </dt>
+                <dd>
+                    <div class="selectbox selebar selectbox_width126" id="selectbox0">
+                        <input name="" value="" type="hidden">
+                        <div class="selectbox_arraw">
+                            <span class="selectbox_down"></span>
+                            <span class="selectbox_up"></span>
+                        </div>
+                        <div class="selectbox_value_box">
+                            <div class="selectbox_value">请选择</div>
+                        </div>
+                        <div class="selectbox_list selectbox_width126">
+                            <div class="selectbox_scroll_body">
+                                <div class="selectbox_scroll">
+                                    <div></div>
+                                </div>
+                            </div>
+                            <ul class="selectbox_body">
+                                <!--<li data-value="0">新增</li>-->
+                            </ul>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+            <dl class="edit-banc">
+                <dt class='text_r'>
+                    版次
+                    <span>*</span>
+                </dt>
+                <dd>
+                    <input type="text" class="ipt">
+                    <span>版</span>
+                </dd>
+            </dl>
+            <dl class="edit-banc">
+                <dt class="text_r">ISBN</dt>
+                <dd>
+                    <input type="text" class="ISBN">
+                </dd>
+            </dl>
+        </div>
+        <div class="clear">
+            <span class="edit-word-long no_check">责任编辑</span>
+            <span class="chargeEditor"></span>
+        </div>
+    </div>
+    <div>
+        <dl>
+            <dt>
+                <input type="checkbox"  name="items" class="item-check" id="rescss" checked="checked">
+                <label for="rescss">资源属性</label>
+                <span>*</span>
+            </dt>
+            <div class="selectbox_x">
+                <dd>
+                    <div class="selectbox selebar selectbox_width126" id="selectbox1" data-default-value="学段">
+                        <input name="" value="" type="hidden">
+                        <div class="selectbox_arraw">
+                            <span class="selectbox_down"></span>
+                            <span class="selectbox_up"></span>
+                        </div>
+                        <div class="selectbox_value_box">
+                            <div class="selectbox_value">学段</div>
+                        </div>
+                        <div class="selectbox_list selectbox_width126">
+                            <div class="selectbox_scroll_body">
+                                <div class="selectbox_scroll">
+                                    <div></div>
+                                </div>
+                            </div>
+                            <ul class="selectbox_body">
+                            </ul>
+                        </div>
+                    </div>
+                </dd>
+                <dd>
+                    <div class="selectbox selebar selectbox_width126" id="selectbox2" data-default-value="学科">
+                        <input name="" value="" type="hidden">
+                        <div class="selectbox_arraw">
+                            <span class="selectbox_down"></span>
+                            <span class="selectbox_up"></span>
+                        </div>
+                        <div class="selectbox_value_box">
+                            <div class="selectbox_value">学科</div>
+                        </div>
+                        <div class="selectbox_list selectbox_width126">
+                            <div class="selectbox_scroll_body">
+                                <div class="selectbox_scroll">
+                                    <div></div>
+                                </div>
+                            </div>
+                            <ul class="selectbox_body">
+                            </ul>
+                        </div>
+                    </div>
+                </dd>
+                <dd>
+                    <div class="selectbox selebar selectbox_width126" id="selectbox3" data-default-value="版本">
+                        <input name="" value="" type="hidden">
+                        <div class="selectbox_arraw">
+                            <span class="selectbox_down"></span>
+                            <span class="selectbox_up"></span>
+                        </div>
+                        <div class="selectbox_value_box">
+                            <div class="selectbox_value">版本</div>
+                        </div>
+                        <div class="selectbox_list selectbox_width126">
+                            <div class="selectbox_scroll_body">
+                                <div class="selectbox_scroll">
+                                    <div></div>
+                                </div>
+                            </div>
+                            <ul class="selectbox_body">
+                            </ul>
+                        </div>
+                    </div>
+                </dd>
+                <dd>
+                    <div class="selectbox selebar selectbox_width126" id="selectbox4" data-default-value="册次">
+                        <input name="" value="" type="hidden">
+                        <div class="selectbox_arraw">
+                            <span class="selectbox_down"></span>
+                            <span class="selectbox_up"></span>
+                        </div>
+                        <div class="selectbox_value_box">
+                            <div class="selectbox_value">册次</div>
+                        </div>
+                        <div class="selectbox_list selectbox_width126">
+                            <div class="selectbox_scroll_body">
+                                <div class="selectbox_scroll">
+                                    <div></div>
+                                </div>
+                            </div>
+                            <ul class="selectbox_body">
+                            </ul>
+                        </div>
+                    </div>
+                </dd>
+                <div class="selectbox_l">
+                    <dd>
+                        <div class="selectbox selebar selectbox_width126" id="selectbox5" data-default-value="章">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw">
+                                <span class="selectbox_down"></span>
+                                <span class="selectbox_up"></span>
+                            </div>
+                            <div class="selectbox_value_box">
+                                <div class="selectbox_value">章</div>
+                            </div>
+                            <div class="selectbox_list selectbox_width126">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll">
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <ul class="selectbox_body">
+                                </ul>
+                            </div>
+                        </div>
+                    </dd>
+                    <dd>
+                        <div class="selectbox selebar selectbox_width126" id="selectbox6" data-default-value="节">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw">
+                                <span class="selectbox_down"></span>
+                                <span class="selectbox_up"></span>
+                            </div>
+                            <div class="selectbox_value_box">
+                                <div class="selectbox_value">节</div>
+                            </div>
+                            <div class="selectbox_list selectbox_width126">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll">
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <ul class="selectbox_body">
+                                </ul>
+                            </div>
+                        </div>
+                    </dd>
+                    <dd>
+                        <div class="selectbox selebar selectbox_width126" id="selectbox7" data-default-value="目">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw">
+                                <span class="selectbox_down"></span>
+                                <span class="selectbox_up"></span>
+                            </div>
+                            <div class="selectbox_value_box">
+                                <div class="selectbox_value">目</div>
+                            </div>
+                            <div class="selectbox_list selectbox_width126">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll">
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <ul class="selectbox_body">
+                                </ul>
+                            </div>
+                        </div>
+                    </dd>
+                    <dd>
+                        <div class="selectbox selebar selectbox_width126" id="selectbox8" data-default-value="课时">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw">
+                                <span class="selectbox_down"></span>
+                                <span class="selectbox_up"></span>
+                            </div>
+                            <div class="selectbox_value_box">
+                                <div class="selectbox_value">课时</div>
+                            </div>
+                            <div class="selectbox_list selectbox_width126">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll">
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <ul class="selectbox_body">
+                                </ul>
+                            </div>
+                        </div>
+                    </dd>
+                </div>
+                <div class="selectbox_l" id="knowledgeAdd">
+                    <dd>
+                        <div class="selectbox selebar selectbox_width126" id="selectboxKnowledge1">
+                            <input value="" type="hidden">
+                            <div class="selectbox_arraw">
+                                <span class="selectbox_down"></span>
+                                <span class="selectbox_up"></span>
+                            </div>
+                            <div class="selectbox_value_box">
+                                <div class="selectbox_value">一级知识点</div>
+                            </div>
+                            <div class="selectbox_list selectbox_width126">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll">
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <ul class="selectbox_body"></ul>
+                            </div>
+                        </div>
+                    </dd>
+                    <dd>
+                        <div class="selectbox selebar selectbox_width126" id="selectboxKnowledge2">
+                            <input value="" type="hidden">
+                            <div class="selectbox_arraw">
+                                <span class="selectbox_down"></span>
+                                <span class="selectbox_up"></span>
+                            </div>
+                            <div class="selectbox_value_box">
+                                <div class="selectbox_value">二级知识点</div>
+                            </div>
+                            <div class="selectbox_list selectbox_width126">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll">
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <ul class="selectbox_body"></ul>
+                            </div>
+                        </div>
+                    </dd>
+                    <dd>
+                        <div class="selectbox selebar selectbox_width126" id="selectboxKnowledge3">
+                            <input value="" type="hidden">
+                            <div class="selectbox_arraw">
+                                <span class="selectbox_down"></span>
+                                <span class="selectbox_up"></span>
+                            </div>
+                            <div class="selectbox_value_box">
+                                <div class="selectbox_value">三级知识点</div>
+                            </div>
+                            <div class="selectbox_list selectbox_width126">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll">
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <ul class="selectbox_body"></ul>
+                            </div>
+                        </div>
+                    </dd>
+                    <dd>
+                        <div class="selectbox selebar selectbox_width126" id="selectboxKnowledge4">
+                            <input value="" type="hidden">
+                            <div class="selectbox_arraw">
+                                <span class="selectbox_down"></span>
+                                <span class="selectbox_up"></span>
+                            </div>
+                            <div class="selectbox_value_box">
+                                <div class="selectbox_value">四级知识点</div>
+                            </div>
+                            <div class="selectbox_list selectbox_width126">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll">
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <ul class="selectbox_body"></ul>
+                            </div>
+                        </div>
+                    </dd>
+                    <div class="addSelectbox">
+                        <span></span>
+                    </div>
+                    <div class="cutSelectbox">
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </dl>
+    </div>
+    <div>
+        <div class="clear">
+            <dl>
+                <dt>
+                    <input type="checkbox"  name="items" class="item-check" id="restype" checked="checked">
+                    <label for="restype">资源类别</label>
+                    <span>*</span>
+                    <span></span>
+                </dt>
+                <dd>
+                    <div class="selectbox selebar selectbox_width126" id="selectboxBox9">
+                        <input name="" value="" type="hidden">
+                        <div class="selectbox_arraw">
+                            <span class="selectbox_down"></span>
+                            <span class="selectbox_up"></span>
+                        </div>
+                        <div class="selectbox_value_box">
+                            <div class="selectbox_value">请选择</div>
+                        </div>
+                        <div class="selectbox_list selectbox_width126">
+                            <div class="selectbox_scroll_body">
+                                <div class="selectbox_scroll">
+                                    <div></div>
+                                </div>
+                            </div>
+                            <ul class="selectbox_body">
+                                <!--<li data-value="0"></li>-->
+                            </ul>
+                        </div>
+                    </div>
+                </dd>
+                <dt class='text_r'>
+                    <label>类别二级</label>
+                    <span></span>
+                    <span></span>
+                </dt>
+                <dd>
+                    <div class="selectbox selebar selectbox_width126" id="selectbox10">
+                        <input name="" value="" type="hidden">
+                        <div class="selectbox_arraw">
+                            <span class="selectbox_down"></span>
+                            <span class="selectbox_up"></span>
+                        </div>
+                        <div class="selectbox_value_box">
+                            <div class="selectbox_value">请选择</div>
+                        </div>
+                        <div class="selectbox_list selectbox_width126">
+                            <div class="selectbox_scroll_body">
+                                <div class="selectbox_scroll">
+                                    <div></div>
+                                </div>
+                            </div>
+                            <ul class="selectbox_body">
+                                <!--<li data-value="0"></li>-->
+                            </ul>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+        <div class="clear">
+            <dl>
+                <dt>
+                    <input type="checkbox"  name="items" class="item-check" id="resurl" checked="checked">
+                    <label for="resurl">资源格式</label>
+                    <span>*</span>
+                    <span></span>
+                </dt>
+                <dd>
+                    <div class="selectbox selebar selectbox_width126" id="selectbox11">
+                        <input name="" value="" type="hidden">
+                        <div class="selectbox_arraw">
+                            <span class="selectbox_down"></span>
+                            <span class="selectbox_up"></span>
+                        </div>
+                        <div class="selectbox_value_box">
+                            <div class="selectbox_value">请选择</div>
+                        </div>
+                        <div class="selectbox_list selectbox_width126">
+                            <div class="selectbox_scroll_body">
+                                <div class="selectbox_scroll">
+                                    <div></div>
+                                </div>
+                            </div>
+                            <ul class="selectbox_body">
+                                <!--<li data-value="0"></li>-->
+                            </ul>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+            <dl class="btm10">
+                <dt>
+                    <input type="checkbox" name="items" class="item-check" id="resourceDes" checked="checked">
+                    <label for="resourceDes">资源描述</label>
+                    <span>*</span>
+                </dt>
+                <dd class="textarea">
+                    <textarea name="" ></textarea>
+                </dd>
+            </dl>
+    </div>
+    <div class='clear'>
+          <dl>
+              <dt>
+                  <input type="checkbox" name="items" class="item-check" id="resourceMaker" checked="checked">
+                  <label for="resourceMaker">资源制作者</label>
+              </dt>
+              <dd>
+                  <input class='text_no text_btm resourceMaker' type="text">
+              </dd>
+          </dl>
+        <dl>
+            <dt>
+                <input type="checkbox" name="items" class="item-check" id="makerIntro" checked="checked">
+                <label for="makerIntro">作者简介</label>
+                <span>*</span>
+            </dt>
+            <dd class="textarea">
+                <textarea name="" class="aboutAuthor"></textarea>
+            </dd>
+        </dl>
+    </div>
+    <div class="mtb_none">
+            <dl>
+                <dt>
+                    <input type="checkbox" name="items" class="item-check" id="useTarget" checked="checked">
+                    <label for="useTarget">使用对象</label>
+                    <span>*</span>
+                </dt>
+                <dd class="once_2">
+                    <input type="checkbox" id="teacher">
+                    <label for="teacher">老师</label>
+                    <input type="checkbox" id="student">
+                    <label for="student">学生</label>
+                </dd>
+            </dl>
+            <dl class="mt10">
+                <dt>
+                    <input type="checkbox" name="items" class="item-check" id="resourceSource" checked="checked">
+                    <label for="resourceSource">资源来源</label>
+                    <span>*</span>
+                </dt>
+                <dd>
+                    <input class='text_btm resourceSources' type="text" class="text">
+                </dd>
+            </dl>
+            <div>
+                <dl>
+                    <dt>
+                        <input type="checkbox" name="items" class="item-check" id="copyrightInput" checked="checked">
+                        <label for="copyrightInput">版权</label>
+                        <span>*</span>
+                        <span></span>
+                    </dt>
+                    <dd>
+                        <div class="selectbox selebar selectbox_width126" id="copyright">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw">
+                                <span class="selectbox_down"></span>
+                                <span class="selectbox_up"></span>
+                            </div>
+                            <div class="selectbox_value_box">
+                                <div class="selectbox_value">请选择</div>
+                            </div>
+                            <div class="selectbox_list selectbox_width126">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll">
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <ul class="selectbox_body">
+                                    <!--<li data-value="0"></li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </dd>
+                </dl>
+               <dl>
+                    <dt class="text_r">
+                        年份
+                        <span>*</span>
+                    </dt>
+                    <dd>
+                        <input class='text_btm yearMonth' type="text" class="text">
+                    </dd>
+               </dl>
+            </div>
+            <dl>
+                <dt>
+                    <input type="checkbox" name="items" class="item-check" id="oneres" checked="checked">
+                    <label for="oneres">独家资源</label>
+                </dt>
+                <dd class="once_2">
+                    <span class="edit-word-long2">
+                        <input type="radio" name="radio" id="yes">
+                        <label for="yes">是</label>
+                    </span>
+                    <input type="radio" name="radio" id="no">
+                    <label for="no">否</label>
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    <input type="checkbox" name="items" class="item-check" id="checkres" checked="checked">
+                    <label for="checkres">原创资源</label>
+                </dt>
+                <dd class="once_2">
+                    <span class="edit-word-long2">
+                        <input type="radio" name="radio01" id="yes01">
+                        <label for="yes01">是</label></span>
+                    <input type="radio" name="radio01" id="no01">
+                    <label for="no01">否</label>
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    <input type="checkbox" name="items" class="item-check" id="test" checked="checked">
+                    <label for="test">文种</label>
+                    <span>*</span>
+                </dt>
+                <dd class="once_2">
+                    <input type="radio" name="test" id="china">
+                    <label for="china">中文</label>
+                    <input type="radio" name="test" id="enish">
+                    <label for="enish">外文</label>
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    <input type="checkbox" name="items" class="item-check" id="resrank" checked="checked">
+                    <label for="resrank">资源等级</label>
+                    <span>*</span>
+                </dt>
+                <dd class="once_2">
+                    <input type="radio" name="rank" id="nice">
+                    <label for="nice">精品</label>
+                    <input type="radio" name="rank" id="common">
+                    <label for="common">普通</label>
+                </dd>
+            </dl>
+            <dl>
+                <dt>
+                    <input type="checkbox" name="items" class="item-check" id="prcie" checked="checked">
+                    <label for="prcie">价格</label>
+                    <span>*</span>
+                </dt>
+                <dd class="once_2">
+                    <input type="radio" name="free" id="free">
+                    <label for="free">免费</label>
+                    <input type="radio" name="free" id="charge">
+                    <label for="charge">收费</label>
+                    <input type="text" class="text dot">点
+                </dd>
+
+            </dl>
+    </div>
+    <div class="foot_part">
+        <div class="list-on">
+            <div>
+                <input type="checkbox" class="checkAll all-check" id="checkAll" checked="checked">
+                <label for="checkAll">全选</label>
+            </div>
+            <div>
+                <input type="checkbox" class="checkFan all-uncheck" id="checkFan">
+                <label for="checkFan">反选</label>
+            </div>
+            <div class='btn_bc_cz'>
+                <button class="btn_cz">重置</button>
+                <button class="btn_bc ">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="switch2">
+        <div class="edit-word">审核状态</div>
+    </div>
+    <div class="shenhe">
+        <div class="clear">
+            <span class="edit-word-long no_check">初审人</span>
+            <span id="createUserName">王铁柱</span>
+        </div>
+        <div class="clear"><span class="edit-word-long no_check">初审日期</span>
+            <span id="createDateTime">2016-10-09</span>
+        </div>
+        <dl>
+            <dt class='no_check'>初审意见栏</dt>
+            <dd class="textarea">
+                <textarea name="" id="appriveDesc"></textarea>
+            </dd>
+        </dl>
+        <div class='btmBrdr'>
+            <aside>
+                <button class="btn btn-fg">发稿</button>
+                <button class="btn btn-grey">返回</button>
+            </aside>
+        </div>
+    </div>
+</div>
+<div class="alertboxB btn_xz_alertb" id="btn_xz_alertb">
+    <div class="alertbox">
+        <div class="closealertb"><img src="../../images/quxiao.png"></div>
+        <h3>选择选题编号</h3>
+        <div class="alert_sousuo">
+            <div class="selectbox selebar selectbox_width126" id="selectboxAlert">
+                <input name="" value="" type="hidden">
+                <div class="selectbox_arraw">
+                    <span class="selectbox_down"></span>
+                    <span class="selectbox_up"></span>
+                </div>
+                <div class="selectbox_value_box">
+                    <div class="selectbox_value">请选择</div>
+                </div>
+                <div class="selectbox_list selectbox_width126">
+                    <div class="selectbox_scroll_body">
+                        <div class="selectbox_scroll">
+                            <div></div>
+                        </div>
+                    </div>
+                    <ul class="selectbox_body">
+                        <li data-value="0">选题编号</li>
+                        <li data-value="1" selected>资源名称</li>
+                    </ul>
+                </div>
+            </div>
+            <input type="text" class="search" id="search">
+            <button class="btn">搜索</button>
+        </div>
+        <div class="wrap_table wrap_table_01 tb_scroll" id="resource">
+            <table  cellpadding="0" cellspacing="0" class="table_01" id="table_data">
+                <tr>
+                    <th></th>
+                    <th>选题编号</th>
+                    <th>资源名称</th>
+                    <th>创建者</th>
+                    <th>创建日期</th>
+                </tr>
+                <!--<tr>-->
+                    <!--<td><input type="radio"></td>-->
+                    <!--<td>Y201601021132</td>-->
+                    <!--<td>第一张集合</td>-->
+                    <!--<td>qwertyu</td>-->
+                    <!--<td>2016-12-12</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td><input type="radio"></td>-->
+                    <!--<td>Y201601021132</td>-->
+                    <!--<td>第一张集合</td>-->
+                    <!--<td>qwertyu</td>-->
+                    <!--<td>2016-12-12</td>-->
+                <!--</tr>-->
+            </table>
+        </div>
+        <button class="btn btn_qd btn-alert-B">确定</button>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>电子教材管理</title>
+    <script src="../../js/lib/jquery-1.12.1.js"></script>
+    <script src="../../js/public.js"></script>
+    <script src="../../js/app/reset.js"></script>
+    <script src="../../../js/operate.js"></script>
+    <script src="../../js/lib/urlParam.js"></script>
+    <script src="../../js/myApp/baseURL.js"></script>
+    <script src="../../js/myApp/geCheckboxIds.js"></script>
+    <script src="../../js/lib/pagination.js"></script>
+    <script src="../../js/lib/bookManageCata.js"></script>
+    <link rel="stylesheet" href="../../css/jquery.selectbox.css">
+    <link rel="stylesheet" href="../../css/jquery.datetimepicker.css">
+    <script src="../../js/lib/jquery.selectbox.js"></script>
+    <script src="../../js/lib/jquery.datetimepicker.js"></script>
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/edit.css">
+    <link rel="stylesheet" type="text/css" href="../../css/e_bookManage.css">
+    <script src="../../js/myApp/resource/bookManage.js"></script>
+    <script>
+        $(function(){
+            //日历组件初始化代码
+            $("#dates_start1").datetimepicker({
+                value:$("#dates_start1").val(),
+                lang:'ch',
+                showSecond: false,
+                timepicker:false,
+                showMillisec: false,
+                format: 'Y-m-d'
+            });
+            $("#dates_end1").datetimepicker({
+                value:$("#dates_end1").val(),
+                lang:'ch',
+                showSecond: false,
+                timepicker:false,
+                showMillisec: false,
+                format: 'Y-m-d'
+            });
+            checkAll("resource");
+            knowledgesAttribute(4, getBasePath()+"bookManage/getCategory",{});
+        })
+    </script>
+</head>
+<body>
+<div class="show">
+    <div class="switch">
+        <div class="edit-word">电子教材管理</div>
+    </div>
+    <div>
+        <div>
+            <div class='selectB'>
+                <div class="selectbox selectbox_width126" id="selectboxKnowledge1">
+                    <input name="" value="" type="hidden">
+                    <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                    <div class="selectbox_value_box"><div class="selectbox_value">学段</div></div>
+                    <div class="selectbox_list selectbox_width126">
+                        <div class="selectbox_scroll_body">
+                            <div class="selectbox_scroll"><div></div></div>
+                        </div>
+                        <ul class="selectbox_body">
+                            <!--<li data-value="0">学段1</li>-->
+                            <!--<li data-value="0">学段2</li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class='selectB'>
+                <div class="selectbox selectbox_width126" id="selectboxKnowledge2">
+                    <input name="" value="" type="hidden">
+                    <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                    <div class="selectbox_value_box"><div class="selectbox_value">学科</div></div>
+                    <div class="selectbox_list selectbox_width126">
+                        <div class="selectbox_scroll_body">
+                            <div class="selectbox_scroll"><div></div></div>
+                        </div>
+                        <ul class="selectbox_body">
+                            <!--<li data-value="0">学科1</li>-->
+                            <!--<li data-value="0">学科2</li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class='selectB'>
+                <div class="selectbox selectbox_width126" id="selectboxKnowledge3">
+                    <input name="" value="" type="hidden">
+                    <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                    <div class="selectbox_value_box"><div class="selectbox_value">版本</div></div>
+                    <div class="selectbox_list selectbox_width126">
+                        <div class="selectbox_scroll_body">
+                            <div class="selectbox_scroll"><div></div></div>
+                        </div>
+                        <ul class="selectbox_body">
+                            <!--<li data-value="0">版本1</li>-->
+                            <!--<li data-value="0">版本2</li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class='selectB'>
+                <div class="selectbox selectbox_width126" id="selectboxKnowledge4">
+                    <input name="" value="" type="hidden">
+                    <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                    <div class="selectbox_value_box"><div class="selectbox_value">册次</div></div>
+                    <div class="selectbox_list selectbox_width126">
+                        <div class="selectbox_scroll_body">
+                            <div class="selectbox_scroll"><div></div></div>
+                        </div>
+                        <ul class="selectbox_body">
+                            <!--<li data-value="0">册次1</li>-->
+                            <!--<li data-value="0">册次2</li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fl0">
+        <!--<dl>-->
+            <!--<dt>推荐时间</dt>-->
+            <!--<dd class="wrap_date">-->
+                <!--<input type="text" id="dates_start1" name="dates_start1" value="2014-10-18">-->
+                <!--<span class="mr10">至</span>-->
+                <!--<input type="text"  id="dates_end1" name="dates_end1" value="2014-10-19">-->
+            <!--</dd>-->
+        <!--</dl>-->
+         <input type="text" class="search" id="resourceName" placeholder="请输入要搜索资源名">
+        <div class="btnBrdr">
+            <aside>
+                <button class="btn" onclick="searchPage(1)">查询</button>
+            </aside>
+        </div>
+    </div>
+    <div class="wrap_table wrap_table_01" id="resource">
+        <table  cellpadding="0" cellspacing="0" class="table_01" id="table_data">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" class="all-check"></th>
+                    <th>资源编号</th>
+                    <th width="20%">资源名称</th>
+                    <th>资源类型</th>
+                    <th>资源格式</th>
+                    <th>版权</th>
+                    <th>版本</th>
+                    <th>年级册次</th>
+                    <th>作者</th>
+                    <th>上传者</th>
+                    <th>输出状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <!--<tr>-->
+                <!--<td><input type="checkbox" class="item-check"></td>-->
+                <!--<td>00000001</td>-->
+                <!--<td>河南省洛阳地区2014-2016年八年级上学期期末考试语文</td>-->
+                <!--<td>课件</td>-->
+                <!--<td>文档</td>-->
+                <!--<td>永久</td>-->
+                <!--<td>北师大版</td>-->
+                <!--<td>八年级上册</td>-->
+                <!--<td>王佳佳</td>-->
+                <!--<td>王佳佳</td>-->
+                <!--<td>可以输出</td>-->
+                <!--<td class="operate"><a href="#">查看</a> <a href="#">取消输出</a></td>-->
+            <!--</tr>-->
+        </table>
+        <div class="delBrdr" id="toolbar">
+            <button class="btn" onclick="outputAll();">批量取消</button>
+            <!--<button class="btn btn-grey">批量删除</button>-->
+            <!--<a href="systemView.html" class="btn btnRht">新增用户</a>-->
+        </div>
+        <div class="delBrdr">
+            <div class="page" id="page">
+                <div class="pageLft">
+                    <!--<a class="noprev"></a>-->
+                    <a href="#" class="prev"></a>
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <span>...</span>
+                    <a href="#" class="next"></a>
+                    <!--<a class="nonext"></a>-->
+                </div>
+                <div class="pageRht">共<span id="totalPage">100</span>页，到第 <input type="text" id="toPage">页 <button onclick="searchPage();">确定</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

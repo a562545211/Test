@@ -1,0 +1,34 @@
+/*foot_part*/
+.foot_part{
+    background: white;
+}
+.mtb_none{
+    margin-bottom: 0!important;
+}
+.line{
+    margin-top: 5px!important;
+    padding-top: 15px!important;
+    border-top: 1px solid #e9e9e9;
+}
+.noline{
+    margin-top: 5px!important;
+    padding-top: 15px!important;
+}
+.fl{
+    float: left;
+}
+.btm_tjfh{
+    height: 60px;
+}
+.wrap_text{
+   float: left;
+}
+.btm_tjfh button{
+    top:15px
+}
+.check_show{
+    margin-left: 10px;
+}
+.star{
+    color:#b9bbc1;
+}

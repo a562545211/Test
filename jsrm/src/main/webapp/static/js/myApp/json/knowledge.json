@@ -1,0 +1,33 @@
+{
+	"status":0,
+	"message":"查询成功",
+	"data":[
+		{
+			"courseware":4,
+			"currentpoint":0,
+			"curriculumAndInterpretation":0,
+			"design":5,
+			"etextbook":0,
+			"expand":0,
+			"experiment":0,
+			"hightest":0,
+			"knowledgedetail":0,
+			"learinng":0,
+			"material":0,
+			"mediumtest":0,
+			"middletest":0,
+			"nationaltest":0,
+			"nounsexplanation":0,
+			"practicaleducation":0,
+			"practice":0,
+			"primarytest":0,
+			"research":0,
+			"smallclass":4,
+			"studyvideo":0,
+			"teacherbook":0,
+			"teachingvideo":0,
+			"textexplain":0,
+			"total":13
+		}
+	]
+}

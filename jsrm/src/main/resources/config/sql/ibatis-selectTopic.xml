@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="selectTopic">
+
+  <select id="querySelectTopicListForPage" resultType="com.jsrm.model.resourceInfo.ResourceInfo" parameterType="map" >
+    select
+      r.id,
+      r.resourceFileCode,
+      r.resourceName,
+      r.createUserId,
+      r.createDateTime,
+      r.createUserName,
+      r.state,
+      r.approver,
+      r.resourceTopicCode
+    from
+      t_resource_info r
+    where resourceType = 'DRA'
+      <if test="state != null and state != ''">
+        and r.state = #{state}
+      </if>
+      <if test="startTime != null and startTime != ''">
+        and r.createDateTime &gt;= #{startTime}
+      </if>
+      <if test="endTime != null and endTime != ''">
+        and r.createDateTime &lt;= DATE_FORMAT(#{endTime},'%Y-%m-%d 23:59:59.999')
+      </if>
+      <if test="resourceFileCode != null and resourceFileCode != ''">
+        and r.resourceFileCode like '%${resourceFileCode}%'
+      </if>
+      <if test="resourceName != null and resourceName != ''">
+        and r.resourceName like '%${resourceName}%'
+      </if>
+      <if test="createUserName != null and createUserName != ''">
+        and r.createUserName like '%${createUserName}%'
+      </if>
+
+      AND state != '0'
+      and
+        r.subjectId in (select dataAuthorityId from t_sys_mid_user_dataauthority_rel where userId = #{id} and deep = '2')
+
+      ORDER BY createDateTime DESC
+
+  </select>
+
+  <select id="querySelectTopic" resultType="com.jsrm.model.resourceInfo.ResourceInfo" parameterType="map" >
+    select * from t_resource_info
+    <where>
+      <if test="empty neq id">
+        AND id = #{id}
+      </if>
+      <if test="empty neq resourceTopicCode">
+        AND resourceTopicCode = #{resourceTopicCode}
+      </if>
+      <if test="empty neq resourceFileCode">
+        AND resourceFileCode = #{resourceFileCode}
+      </if>
+    </where>
+
+    ORDER BY createDateTime DESC
+  </select>
+
+  <insert id="saveSelectTopic" parameterType="com.jsrm.web.vo.ResourceInfoVo.ResourceInfoVo">
+    insert into
+        t_resource_info(
+        id,
+        resourceType,
+        tResourceCodeId,
+        tResourceCode,
+        resourceName,
+        draftTypeId,
+        draftTypeValue,
+        edition,
+        ISBN,
+        resourceTypeOneLevelId,
+        resourceTypeOneLevelValue,
+        resourceTypeTwoLevelId,
+        resourceTypeTwoLevelValue,
+        resourceFormatId,
+        resourceFormatValue,
+        wordCount,
+        timeCount,
+        mapCount,
+        resourceDes,
+        resourceMaker,
+        makerIntro,
+        useTarget,
+        resourceSource,
+        copyright,
+        yearMonth,
+        isAloneRes,
+        isOriginal,
+        isChinese,
+        resourceLevel,
+        isFree,
+        cost,
+        state,
+        createUserId,
+        createUserName,
+        createDateTime,
+        approverId,
+        approver,
+        categoresCode,
+        knowledgeCode,
+        phaseId,
+        phase,
+        subjectId,
+        subject,
+        fileSize,
+        fileName
+        )
+        values(
+        #{id},
+        #{resourceType},
+        #{tResourceCodeId},
+        #{tResourceCode},
+        #{resourceName},
+        #{draftTypeId},
+        #{draftTypeValue},
+        #{edition},
+        #{ISBN},
+        #{resourceTypeOneLevelId},
+        #{resourceTypeOneLevelValue},
+        #{resourceTypeTwoLevelId},
+        #{resourceTypeTwoLevelValue},
+        #{resourceFormatId},
+        #{resourceFormatValue},
+        #{wordCount},
+        #{timeCount},
+        #{mapCount},
+        #{resourceDes},
+        #{resourceMaker},
+        #{makerIntro},
+        #{useTarget},
+        #{resourceSource},
+        #{copyright},
+        #{yearMonth},
+        #{isAloneRes},
+        #{isOriginal},
+        #{isChinese},
+        #{resourceLevel},
+        #{isFree},
+        #{cost},
+        #{state},
+        #{createUserId},
+        #{createUserName},
+        #{createDateTime},
+        #{approverId},
+        #{approver},
+        #{categoresCode},
+        #{knowledgeCode},
+        #{phaseId},
+        #{phase},
+        #{subjectId},
+        #{subject},
+        #{fileSize},
+        #{fileName}
+        )
+  </insert>
+  
+  <update id="updateSelectTopic" parameterType="com.jsrm.web.vo.ResourceInfoVo.ResourceInfoVo">
+    update 
+      t_resource_info
+    <set>
+      <if test="resourceType != null ">
+        resourceType = #{resourceType},
+      </if>
+      <if test=" tResourceCodeId != null">
+        tResourceCodeId = #{tResourceCodeId},
+      </if>
+      <if test=" tResourceCode != null">
+        tResourceCode = #{tResourceCode},
+      </if>
+      <if test=" resourceName != null">
+        resourceName = #{resourceName},
+      </if>
+      <if test=" draftTypeId != null">
+        draftTypeId = #{draftTypeId},
+      </if>
+      <if test=" draftTypeValue != null">
+        draftTypeValue = #{draftTypeValue},
+      </if>
+      <if test=" edition != null">
+        edition = #{edition},
+      </if>
+      <if test=" ISBN != null">
+        ISBN = #{ISBN},
+      </if>
+      <if test=" resourceTypeOneLevelId != null">
+        resourceTypeOneLevelId = #{resourceTypeOneLevelId},
+      </if>
+      <if test=" resourceTypeOneLevelValue != null">
+        resourceTypeOneLevelValue = #{resourceTypeOneLevelValue},
+      </if>
+      <if test=" resourceTypeTwoLevelId != null">
+        resourceTypeTwoLevelId = #{resourceTypeTwoLevelId},
+      </if>
+      <if test=" resourceTypeTwoLevelValue != null">
+        resourceTypeTwoLevelValue = #{resourceTypeTwoLevelValue},
+      </if>
+      <if test=" resourceFormatId != null">
+        resourceFormatId = #{resourceFormatId},
+      </if>
+      <if test=" resourceFormatValue != null">
+        resourceFormatValue = #{resourceFormatValue},
+      </if>
+      <if test=" wordCount != null">
+        wordCount = #{wordCount},
+      </if>
+      <if test=" timeCount != null">
+        timeCount = #{timeCount},
+      </if>
+      <if test=" mapCount != null">
+        mapCount = #{mapCount},
+      </if>
+      <if test=" resourceDes != null">
+        resourceDes = #{resourceDes},
+      </if>
+      <if test=" resourceMaker != null">
+        resourceMaker = #{resourceMaker},
+      </if>
+      <if test=" makerIntro != null">
+        makerIntro = #{makerIntro},
+      </if>
+      <if test=" useTarget != null">
+        useTarget = #{useTarget},
+      </if>
+      <if test=" resourceSource != null">
+        resourceSource = #{resourceSource},
+      </if>
+      <if test=" copyright != null">
+        copyright = #{copyright},
+      </if>
+      <if test=" yearMonth != null">
+        yearMonth = #{yearMonth},
+      </if>
+      <if test=" isAloneRes != null">
+        isAloneRes = #{isAloneRes},
+      </if>
+      <if test=" isOriginal != null">
+        isOriginal = #{isOriginal},
+      </if>
+      <if test=" isAloneRes != null">
+        isAloneRes = #{isAloneRes},
+      </if>
+      <if test=" isChinese != null">
+        isChinese = #{isChinese},
+      </if>
+      <if test=" resourceLevel != null">
+        resourceLevel = #{resourceLevel},
+      </if>
+      <if test=" isFree != null">
+        isFree = #{isFree},
+      </if>
+      <if test=" cost != null">
+        cost = #{cost},
+      </if>
+      <if test=" isFree != null">
+        isFree = #{isFree},
+      </if>
+      <if test=" createUserId != null">
+        createUserId = #{createUserId},
+      </if>
+      <if test=" createUserName != null">
+        createUserName = #{createUserName},
+      </if>
+      <if test=" createDateTime != null">
+        createDateTime = #{createDateTime},
+      </if>
+      <if test="createUserName != null">
+        createUserName = #{createUserName},
+      </if>
+      <if test="approverId != null">
+        approverId = #{approverId},
+      </if>
+      <if test=" approver != null">
+        approver = #{approver},
+      </if>
+      <if test=" categoresCode != null">
+        categoresCode = #{categoresCode},
+      </if>
+      <if test=" knowledgeCode != null">
+        knowledgeCode = #{knowledgeCode},
+      </if>
+      <if test=" phase != null">
+        phase = #{phase},
+      </if>
+      <if test="subject != null">
+        subject = #{subject},
+      </if>
+      <if test="state != null and state!=''">
+        state = #{state},
+      </if>
+      <if test="resourceTopicCode != null and resourceTopicCode!=''">
+        resourceTopicCode = #{resourceTopicCode},
+      </if>
+      <if test="resourceFileCode != null and resourceFileCode!=''">
+        resourceFileCode = #{resourceFileCode},
+      </if>
+    </set>
+    where
+      id = #{id}
+  </update>
+
+  <select id="selectSelectTopicList" resultType="com.jsrm.model.resourceInfo.ResourceInfo" parameterType="map" >
+    select
+      r.id,
+      r.tResourceCode,
+      r.resourceName,
+      r.createUserName,
+      r.createDateTime,
+      r.categoresCode
+    from
+      t_resource_info r
+    where resourceType = 'DRA'
+    <if test="tResourceCode != null and tResourceCode != ''">
+      and r.tResourceCode = #{tResourceCode}
+    </if>
+    <if test="resourceName != null and resourceName != ''">
+      and r.resourceName = #{resourceName}
+    </if>
+
+
+    ORDER BY createDateTime DESC
+  </select>
+
+  <select id="selectSelectTopicById" resultType="com.jsrm.model.resourceInfo.ResourceInfo" parameterType="map" >
+    select * from t_resource_info r where r.id = #{id}
+  </select>
+
+</mapper>

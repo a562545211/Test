@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>资源管理</title>
+    <script src="../../js/lib/jquery-1.12.1.js"></script>
+    <script src="../../js/public.js"></script>
+    <script src="../../js/app/reset.js"></script>
+    <script src="../../../js/operate.js"></script>
+    <script src="../../js/myApp/baseURL.js"></script>
+    <script src="../../js/lib/urlParam.js"></script>
+    <link rel="stylesheet" href="../../css/jquery.selectbox.css">
+    <link rel="stylesheet" href="../../css/jquery.datetimepicker.css">
+    <script src="../../js/lib/jquery.selectbox.js"></script>
+    <script src="../../js/lib/jquery.datetimepicker.js"></script>
+    <link rel="stylesheet" href="../../css/public.css">
+    <link rel="stylesheet" href="../../css/edit.css">
+    <script src="../../js/app/resource_mo.js"></script>
+    <script src="../../js/lib/icategories.init.js"></script>
+    <script src="../../js/lib/iknowledges.init.js"></script>
+    <script src="../../js/lib/pagination.js"></script>
+    <script src="../../js/myApp/common.js"></script>
+    <script src="../../js/myApp/resource/recycle.js"></script>
+    <script>
+        var itemid = $.getUrlParam("itemId");
+        $(function () {
+            initBq();
+            var result = $.getOperateByType({
+                "itemId": itemid,
+                "type": ['bar'],
+                "path": '/'
+            });
+            if (result && result.bar) {
+                for (var i = 0; i < result.bar.length; i++) {
+                    $("#ien").append("<a href=\"javascript:void(0)\" onclick='" + result.bar[i].operatemethod + "()' class=\"upRht\">" + result.bar[i].operatetitle + "</a>");
+                }
+            }
+
+        });
+        function initBq(){
+            var html ='<a href="resource.html?itemId='+itemid+'">全部</a>'+
+                    '<a href="resource.html?state=1&itemId='+itemid+'">待提交</a>'+
+                    '<a href="resource.html?state=2&itemId='+itemid+'">待审核</a>'+
+                    '<a href="resource.html?state=3&itemId='+itemid+'" >通过</a>'+
+                    '<a href="resource.html?state=4&itemId='+itemid+'">不通过</a>'+
+                    '<a href="recycle.html&itemId='+itemid+'" class="selected">回收站</a>';
+            $("#ien").append(html);
+        }
+        function upload(obj){
+            window.location.href="../resource/up_orig.html?itemId="+itemid;
+        }
+    </script>
+</head>
+<body>
+<div class="show">
+    <div class="switch" id="ien">
+            <div class="edit-word">资源管理</div>
+
+        <!--<a href="../resource/up_orig.html" class="upRht"> 我要上传</a>-->
+    </div>
+    <div>
+        <div class='selectB'>
+            <div class="selectbox" id="selectbox0">
+                <input name="" value="" type="hidden">
+                <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                <div class="selectbox_value_box"><div class="selectbox_value">资源编号</div></div>
+                <div class="selectbox_list selectbox_width120">
+                    <div class="selectbox_scroll_body">
+                        <div class="selectbox_scroll"><div></div></div>
+                    </div>
+                    <ul class="selectbox_body">
+                        <li data-value="resourceFileCode" class="selectbox_selected">资源编号</li>
+                        <li data-value="resourceName">资源名称</li>
+                        <li data-value="createUserName">上传者</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <input type="text" class="search" placeholder="请输入搜索的内容" id="search">
+        <!--<button class="btn">搜索</button>-->
+    </div>
+    <div class="showBg">
+        <div class="switch content-subnav">
+            <div class="edit-word">分类</div>
+            <div class="edit-All">
+                <a href="javascript:void(0);" class="selected" data-value="">全部</a>
+                <a href="javascript:void(0);" data-value="ORI">原始文件</a>
+                <a href="javascript:void(0);" data-value="PRO">工程文件</a>
+                <a href="javascript:void(0);" data-value="END">成品文件</a>
+            </div>
+        </div>
+        <dl>
+            <dt>资源属性</dt>
+            <dd>
+                <div class="selectbox_l">
+                    <div class='selectB'>
+                        <div class="selectbox" id="selectbox1" data-default-value="学段">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                            <div class="selectbox_value_box"><div class="selectbox_value">学段</div></div>
+                            <div class="selectbox_list selectbox_width120">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll"><div></div></div>
+                                </div>
+                                <ul class="selectbox_body">
+                                    <li data-value="0">资源编号</li>
+                                    <li data-value="0">音频</li>
+                                    <li data-value="0">视频</li>
+                                    <li data-value="0">动画</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='selectB'>
+                        <div class="selectbox" id="selectbox2" data-default-value="学科">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                            <div class="selectbox_value_box"><div class="selectbox_value">学科</div></div>
+                            <div class="selectbox_list selectbox_width120">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll"><div></div></div>
+                                </div>
+                                <ul class="selectbox_body">
+                                    <li data-value="0">资源编号</li>
+                                    <li data-value="0">音频</li>
+                                    <li data-value="0">视频</li>
+                                    <li data-value="0">动画</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='selectB'>
+                        <div class="selectbox" id="selectbox3" data-default-value="版本">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                            <div class="selectbox_value_box"><div class="selectbox_value">版本</div></div>
+                            <div class="selectbox_list selectbox_width120">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll"><div></div></div>
+                                </div>
+                                <ul class="selectbox_body">
+                                    <li data-value="0">资源编号</li>
+                                    <li data-value="0">音频</li>
+                                    <li data-value="0">视频</li>
+                                    <li data-value="0">动画</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='selectB'>
+                        <div class="selectbox" id="selectbox4" data-default-value="册次">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                            <div class="selectbox_value_box"><div class="selectbox_value">册次</div></div>
+                            <div class="selectbox_list selectbox_width120">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll"><div></div></div>
+                                </div>
+                                <ul class="selectbox_body">
+                                    <li data-value="0">资源编号</li>
+                                    <li data-value="0">音频</li>
+                                    <li data-value="0">视频</li>
+                                    <li data-value="0">动画</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='selectB'>
+                        <div class="selectbox" id="selectbox5" data-default-value="章">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                            <div class="selectbox_value_box"><div class="selectbox_value">章</div></div>
+                            <div class="selectbox_list selectbox_width120">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll"><div></div></div>
+                                </div>
+                                <ul class="selectbox_body">
+                                    <li data-value="0">资源编号</li>
+                                    <li data-value="0">音频</li>
+                                    <li data-value="0">视频</li>
+                                    <li data-value="0">动画</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='selectB'>
+                        <div class="selectbox" id="selectbox6" data-default-value="节">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                            <div class="selectbox_value_box"><div class="selectbox_value">节</div></div>
+                            <div class="selectbox_list selectbox_width120">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll"><div></div></div>
+                                </div>
+                                <ul class="selectbox_body">
+                                    <li data-value="0">资源编号</li>
+                                    <li data-value="0">音频</li>
+                                    <li data-value="0">视频</li>
+                                    <li data-value="0">动画</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='selectB'>
+                        <div class="selectbox" id="selectbox7"  data-default-value="目">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                            <div class="selectbox_value_box"><div class="selectbox_value">目</div></div>
+                            <div class="selectbox_list selectbox_width120">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll"><div></div></div>
+                                </div>
+                                <ul class="selectbox_body">
+                                    <li data-value="0">资源编号</li>
+                                    <li data-value="0">音频</li>
+                                    <li data-value="0">视频</li>
+                                    <li data-value="0">动画</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='selectB'>
+                        <div class="selectbox" id="selectbox8" data-default-value="课时">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                            <div class="selectbox_value_box"><div class="selectbox_value">课时</div></div>
+                            <div class="selectbox_list selectbox_width120">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll"><div></div></div>
+                                </div>
+                                <ul class="selectbox_body">
+                                    <li data-value="0">资源编号</li>
+                                    <li data-value="0">音频</li>
+                                    <li data-value="0">视频</li>
+                                    <li data-value="0">动画</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class='selectB'>-->
+                        <!--<div class="selectbox">-->
+                            <!--<input name="" value="" type="hidden">-->
+                            <!--<div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>-->
+                            <!--<div class="selectbox_value_box"><div class="selectbox_value">资源编号</div></div>-->
+                            <!--<div class="selectbox_list selectbox_width120">-->
+                                <!--<div class="selectbox_scroll_body">-->
+                                    <!--<div class="selectbox_scroll"><div></div></div>-->
+                                <!--</div>-->
+                                <!--<ul class="selectbox_body">-->
+                                    <!--<li data-value="0">资源编号</li>-->
+                                    <!--<li data-value="0">音频</li>-->
+                                    <!--<li data-value="0">视频</li>-->
+                                    <!--<li data-value="0">动画</li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class='selectB'>-->
+                        <!--<div class="selectbox">-->
+                            <!--<input name="" value="" type="hidden">-->
+                            <!--<div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>-->
+                            <!--<div class="selectbox_value_box"><div class="selectbox_value">资源编号</div></div>-->
+                            <!--<div class="selectbox_list selectbox_width120">-->
+                                <!--<div class="selectbox_scroll_body">-->
+                                    <!--<div class="selectbox_scroll"><div></div></div>-->
+                                <!--</div>-->
+                                <!--<ul class="selectbox_body">-->
+                                    <!--<li data-value="0">资源编号</li>-->
+                                    <!--<li data-value="0">音频</li>-->
+                                    <!--<li data-value="0">视频</li>-->
+                                    <!--<li data-value="0">动画</li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class='selectB'>-->
+                        <!--<div class="selectbox">-->
+                            <!--<input name="" value="" type="hidden">-->
+                            <!--<div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>-->
+                            <!--<div class="selectbox_value_box"><div class="selectbox_value">资源编号</div></div>-->
+                            <!--<div class="selectbox_list selectbox_width120">-->
+                                <!--<div class="selectbox_scroll_body">-->
+                                    <!--<div class="selectbox_scroll"><div></div></div>-->
+                                <!--</div>-->
+                                <!--<ul class="selectbox_body">-->
+                                    <!--<li data-value="0">资源编号</li>-->
+                                    <!--<li data-value="0">音频</li>-->
+                                    <!--<li data-value="0">视频</li>-->
+                                    <!--<li data-value="0">动画</li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class='selectB'>-->
+                        <!--<div class="selectbox">-->
+                            <!--<input name="" value="" type="hidden">-->
+                            <!--<div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>-->
+                            <!--<div class="selectbox_value_box"><div class="selectbox_value">资源编号</div></div>-->
+                            <!--<div class="selectbox_list selectbox_width120">-->
+                                <!--<div class="selectbox_scroll_body">-->
+                                    <!--<div class="selectbox_scroll"><div></div></div>-->
+                                <!--</div>-->
+                                <!--<ul class="selectbox_body">-->
+                                    <!--<li data-value="0">资源编号</li>-->
+                                    <!--<li data-value="0">音频</li>-->
+                                    <!--<li data-value="0">视频</li>-->
+                                    <!--<li data-value="0">动画</li>-->
+                                <!--</ul>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </dd>
+        </dl>
+        <dl>
+            <dt>知识点</dt>
+            <dd>
+                <div class="selectbox_l">
+                    <div class='selectB'>
+                        <div class="selectbox" id="selectboxKnowledge1" data-default-value="一级知识点">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                            <div class="selectbox_value_box"><div class="selectbox_value">一级知识点</div></div>
+                            <div class="selectbox_list selectbox_width120">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll"><div></div></div>
+                                </div>
+                                <ul class="selectbox_body">
+                                    <!--<li data-value="0">资源编号</li>-->
+                                    <!--<li data-value="0">音频</li>-->
+                                    <!--<li data-value="0">视频</li>-->
+                                    <!--<li data-value="0">动画</li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='selectB'>
+                        <div class="selectbox" id="selectboxKnowledge2" data-default-value="二级知识点">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                            <div class="selectbox_value_box"><div class="selectbox_value">二级知识点</div></div>
+                            <div class="selectbox_list selectbox_width120">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll"><div></div></div>
+                                </div>
+                                <ul class="selectbox_body">
+                                    <!--<li data-value="0">资源编号</li>-->
+                                    <!--<li data-value="0">音频</li>-->
+                                    <!--<li data-value="0">视频</li>-->
+                                    <!--<li data-value="0">动画</li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='selectB'>
+                        <div class="selectbox" id="selectboxKnowledge3" data-default-value="三级知识点">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                            <div class="selectbox_value_box"><div class="selectbox_value">三级知识点</div></div>
+                            <div class="selectbox_list selectbox_width120">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll"><div></div></div>
+                                </div>
+                                <ul class="selectbox_body">
+                                    <!--<li data-value="0">资源编号</li>-->
+                                    <!--<li data-value="0">音频</li>-->
+                                    <!--<li data-value="0">视频</li>-->
+                                    <!--<li data-value="0">动画</li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='selectB'>
+                        <div class="selectbox" id="selectboxKnowledge4" data-default-value="四级知识点">
+                            <input name="" value="" type="hidden">
+                            <div class="selectbox_arraw"><span class="selectbox_down"></span><span class="selectbox_up"></span></div>
+                            <div class="selectbox_value_box"><div class="selectbox_value">四级知识点</div></div>
+                            <div class="selectbox_list selectbox_width120">
+                                <div class="selectbox_scroll_body">
+                                    <div class="selectbox_scroll"><div></div></div>
+                                </div>
+                                <ul class="selectbox_body">
+                                    <!--<li data-value="0">资源编号</li>-->
+                                    <!--<li data-value="0">音频</li>-->
+                                    <!--<li data-value="0">视频</li>-->
+                                    <!--<li data-value="0">动画</li>-->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </dd>
+        </dl>
+        <dl>
+            <dt>上传时间</dt>
+            <dd class="wrap_date">
+                <input type="text" id="dates_start1" name="dates_start1" value="">
+                <span class="mr10">至</span>
+                <input type="text"  id="dates_end1" name="dates_end1" value="">
+            </dd>
+        </dl>
+        <div class="btnBrdr">
+            <aside>
+                <button class="btn" onclick="searchPage(1);">查询</button>
+                <button class="btn btn-grey">重置</button>
+            </aside>
+
+        </div>
+    </div>
+    <div class="wrap_table wrap_table_01" id="resource">
+        <table  cellpadding="0" cellspacing="0" class="table_01">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" class="all-check"></th>
+                    <th>资源编号</th>
+                    <th>资源名称</th>
+                    <th>大小</th>
+                    <th>分类</th>
+                    <th>学段</th>
+                    <th>学科</th>
+                    <th>资源类型</th>
+                    <th>资源来源</th>
+                    <th>上传者</th>
+                    <th>上传时间</th>
+                    <!--<th>状态</th>-->
+                    <th>审核人</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <!--<tbody>-->
+                <!--<tr>-->
+                    <!--<td><input type="checkbox" class="item-check"></td>-->
+                    <!--<td>Y00000001001</td>-->
+                    <!--<td>XXX1.MOV</td>-->
+                    <!--<td>21G</td>-->
+                    <!--<td>原始文件</td>-->
+                    <!--<td>初中</td>-->
+                    <!--<td>数学</td>-->
+                    <!--<td>-</td>-->
+                    <!--<td>自作</td>-->
+                    <!--<td>Gintama</td>-->
+                    <!--<td>2016-9-10</td>-->
+                    <!--<td><span class="passed">通过</span></td>-->
+                    <!--<td>imouto</td>-->
+                    <!--<td class="operate"><a href="#">查看</a> <span>编辑</span> <a href="#">下载</a></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td><input type="checkbox" class="item-check"></td>-->
+                    <!--<td>Y00000001001</td>-->
+                    <!--<td>XXX1.MOV</td>-->
+                    <!--<td>21G</td>-->
+                    <!--<td>原始文件</td>-->
+                    <!--<td>初中</td>-->
+                    <!--<td>数学</td>-->
+                    <!--<td>-</td>-->
+                    <!--<td>自作</td>-->
+                    <!--<td>Gintama</td>-->
+                    <!--<td>2016-9-10</td>-->
+                    <!--<td><span class="nopassed">不通过</span></td>-->
+                    <!--<td>imouto</td>-->
+                    <!--<td class="operate"><a href="#">查看</a> <a href="#">编辑</a> <span>下载</span></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td><input type="checkbox" class="item-check"></td>-->
+                    <!--<td>Y00000001001</td>-->
+                    <!--<td>XXX1.MOV</td>-->
+                    <!--<td>21G</td>-->
+                    <!--<td>原始文件</td>-->
+                    <!--<td>初中</td>-->
+                    <!--<td>数学</td>-->
+                    <!--<td>-</td>-->
+                    <!--<td>自作</td>-->
+                    <!--<td>Gintama</td>-->
+                    <!--<td>2016-9-10</td>-->
+                    <!--<td><span class="smt">待提交</span></td>-->
+                    <!--<td>imouto</td>-->
+                    <!--<td class="operate"><a href="#">查看</a> <a href="#">编辑</a> <span>下载</span></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td><input type="checkbox" class="item-check"></td>-->
+                    <!--<td>Y00000001001</td>-->
+                    <!--<td>XXX1.MOV</td>-->
+                    <!--<td>21G</td>-->
+                    <!--<td>原始文件</td>-->
+                    <!--<td>初中</td>-->
+                    <!--<td>数学</td>-->
+                    <!--<td>-</td>-->
+                    <!--<td>自作</td>-->
+                    <!--<td>Gintama</td>-->
+                    <!--<td>2016-9-10</td>-->
+                    <!--<td><span class="chck">待审核</span></td>-->
+                    <!--<td>imouto</td>-->
+                    <!--<td class="operate"><a href="#">查看</a> <a href="#">编辑</a> <a href="#">下载</a></td>-->
+                <!--</tr>-->
+            <!--</tbody>-->
+        </table>
+        <div class="delBrdr">
+            <button class="btn" id="onShelves">上架</button>
+             <div class="page" id="page">
+                 <div class="pageLft">
+                     <!--<a class="noprev"></a>-->
+                     <a href="#" class="prev"></a>
+                     <a href="#">1</a>
+                     <a href="#">2</a>
+                     <a href="#">3</a>
+                     <a href="#">4</a>
+                     <a href="#">5</a>
+                     <span>...</span>
+                     <a href="#" class="next"></a>
+                     <!--<a class="nonext"></a>-->
+                 </div>
+                 <div class="pageRht">共<span id="totalPage">100</span>页，到第 <input type="text" id="toPage">页 <button onclick="searchPage();">确定</button></div>
+             </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

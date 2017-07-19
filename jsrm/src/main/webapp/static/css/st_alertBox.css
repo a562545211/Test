@@ -1,0 +1,56 @@
+.alertboxB{
+    position:fixed;
+    top:0;
+    left:0;
+    bottom: 0;
+    right:0;
+    background:rgba(0,0,0,0.35);
+    display: none;
+    color:#666666;
+    z-index: 1993;
+}
+.alertbox,.alertbox1{
+    width:392px;
+    height:290px;
+    background: white;
+    /*padding:0 16px 6px;*/
+    position: relative;
+    text-align: center;
+    box-shadow: 0.5px 0.5px 2px 0.5px #dadada;
+    margin:10% auto 0;
+    padding:20px 40px;
+}
+.alertbox h2,.alertbox1 h2{
+    line-height:46px;
+    text-align: center;
+}
+.closealertb{
+    width:26px;
+    height:26px;
+    position:absolute;
+    top:-39px;
+    right:-26px;
+}
+.alertBox_subject{
+    margin-left: 0;
+}
+.alertBox_phasesubject{
+    margin-top:20px;
+    margin-left: 50px;
+}
+#phasesubject3{
+    margin-left: 50px;
+}
+#phasesubject4{
+    margin-left: 50px;
+}
+.alertbox_btn{
+    margin: 20px 50px;
+}
+.alertbox_btn button:nth-child(1){
+    margin-left: 0;
+}
+.alertbox_btn button:nth-child(2){
+    margin-left:100px;
+}
+

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fileUpload">
+
+    <insert id="addFile" parameterType="java.util.HashMap">
+      INSERT INTO t_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="empty neq id">
+                id,
+            </if>
+            <if test="empty neq fileName">
+                fileName,
+            </if>
+            <if test="empty neq fileFormat">
+                fileFormat,
+            </if>
+            <if test="empty neq filePath">
+                filePath,
+            </if>
+            <if test="empty neq fileReName">
+                fileReName,
+            </if>
+            <if test="empty neq fileSize">
+                fileSize,
+            </if>
+            <if test="empty neq MD5Code">
+                MD5Code,
+            </if>
+            <if test="empty neq relateType">
+                relateType,
+            </if>
+            <if test="empty neq relateId">
+                relateId,
+            </if>
+            <if test="empty neq uploadUserId">
+                uploadUserId,
+            </if>
+            <if test="empty neq uploadUserName">
+                uploadUserName,
+            </if>
+            <if test="empty neq state">
+                state,
+            </if>
+            <if test="empty neq uploadTime">
+                uploadTime
+            </if>
+        </trim>
+
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="empty neq id">
+                #{id},
+            </if>
+            <if test="empty neq fileName">
+                #{fileName},
+            </if>
+            <if test="empty neq fileFormat">
+                #{fileFormat},
+            </if>
+            <if test="empty neq filePath">
+                #{filePath},
+            </if>
+            <if test="empty neq fileReName">
+                #{fileReName},
+            </if>
+            <if test="empty neq fileSize">
+                #{fileSize},
+            </if>
+            <if test="empty neq MD5Code">
+                #{MD5Code},
+            </if>
+            <if test="empty neq relateType">
+                #{relateType},
+            </if>
+            <if test="empty neq relateId">
+                #{relateId},
+            </if>
+            <if test="empty neq uploadUserId">
+                #{uploadUserId},
+            </if>
+            <if test="empty neq uploadUserName">
+                #{uploadUserName},
+            </if>
+            <if test="empty neq state">
+                #{state},
+            </if>
+            <if test="empty neq uploadTime">
+                #{uploadTime}
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateFile" parameterType="java.util.HashMap">
+
+        UPDATE t_file SET
+        <set>
+            <if test="empty neq fileName">
+                fileName = #{fileName},
+            </if>
+            <if test="empty neq fileFormat">
+                fileFormat = #{fileFormat},
+            </if>
+            <if test="empty neq filePath">
+                filePath = #{filePath},
+            </if>
+            <if test="empty neq fileReName">
+                fileReName = #{fileReName},
+            </if>
+            <if test="empty neq fileSize">
+                fileSize = #{fileSize},
+            </if>
+            <if test="empty neq MD5Code">
+                MD5Code = #{MD5Code},
+            </if>
+            <if test="empty neq relateType">
+                relateType = #{relateType},
+            </if>
+            <if test="empty neq relateId">
+                relateId = #{relateId},
+            </if>
+            <if test="empty neq uploadUserId">
+                uploadUserId = #{uploadUserId},
+            </if>
+            <if test="empty neq uploadUserName">
+                uploadUserName = #{uploadUserName},
+            </if>
+            <if test="empty neq state">
+                state = #{state},
+            </if>
+            <if test="empty neq uploadTime">
+                uploadTime =#{uploadTime}
+            </if>
+        </set>
+        <where>
+            <if test="empty neq id">
+              id = #{id}
+            </if>
+        </where>
+    </update>
+
+    <select id="selectOneFileInfo" resultType="com.jsrm.model.fileUpload.FileInfo" parameterType="java.util.HashMap" >
+
+          select * from t_file
+
+          <where>
+              <if test="empty neq id">
+                AND id = #{id}
+              </if>
+              <if test="empty neq relateId">
+                  AND relateId = #{relateId}
+              </if>
+              <if test="empty neq relateType">
+                  AND relateType = #{relateType}
+              </if>
+              <if test="empty neq uploadUserId">
+                  AND uploadUserId = #{uploadUserId}
+              </if>
+          </where>
+
+        limit 1;
+
+    </select>
+
+</mapper>
